@@ -44,6 +44,7 @@ public class MD5Util {
     }
 
     public static String MD5EncodeUtf8(String origin) {
+        origin = origin + "5ling@2yang../0";
         return MD5Encode(origin,"UTF-8");
     }
 

@@ -14,4 +14,16 @@ public interface IUserService {
     ServerResponse selectQuestion(String username);
 
     ServerResponse<String> checkAnswer(String username,String question,String answer);
+
+    ServerResponse<String> resetPassword(String passwordOld,String passwordNew,User user);
+
+    ServerResponse<String> forgetRestPassword(String username,String passwordNew,String forgetToken);
+
+    ServerResponse<User> updateInformation(User user);
+
+    ServerResponse<User> getInformation(Integer userId);
+
+    ServerResponse checkAdminRole(User user);
+
 }
+

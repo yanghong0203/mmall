@@ -1,17 +1,16 @@
 package com.mmall.common;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class TokenCache {
     private static Logger logger= LoggerFactory.getLogger(TokenCache.class);
+    public static final String TOKEN_PREFIX = "token_";
 
     private static LoadingCache<String,String> localCache = CacheBuilder.newBuilder()
             .initialCapacity(1000)
