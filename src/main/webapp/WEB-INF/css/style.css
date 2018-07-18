@@ -1,0 +1,143 @@
+a{
+	color: black;
+}
+.nav-mar-bot{
+	margin-bottom: 0px;
+}
+#carousel-821981{
+	margin-top: 50px;
+}
+.badge-position{
+	margin-top:-6px;
+}
+.logo{
+	margin-top: -5px ;
+}
+.glyphicon-shopping-cart-size{
+	font-size: 17px;
+}
+.index-title-center{
+	text-align: center;
+}
+.commodity-price{
+	color: red;
+}
+.new-recommend{
+	margin-top: -20px;
+}
+.new-recommend-div{
+	margin-top: 20px;
+}
+.zthd-right-ton{
+	margin-bottom: 22px;
+}
+
+.qzlp p{
+	padding-bottom:20px ;
+}
+.qzlp a{
+	background-color: #EEEEEE;
+}
+@media screen and (min-width:768px) and (max-width:992px) {  
+  .qzlp-padding{padding-bottom:20px ;}  
+} 
+.index-bottom{
+	background-color: #F5F5F5;
+	padding-top: 30px;
+}
+.commodity-list{
+	margin-top: 20px;
+}
+.other-page-magtop{
+	margin-top: 40px;
+}
+.a-bule{
+	color:deepskyblue;
+}
+.cart-table tr td:first-child{
+	border-left:solid 1px #DDDDDD ;
+}
+.cart-table tr td:last-child{
+	border-right:solid 1px #DDDDDD ;
+}
+.cart-table tr:last-child{
+	border-bottom:solid 1px #DDDDDD ;
+}
+.cart-table-sm{
+	font-size: 12px;
+}
+.table tbody tr td{
+    vertical-align: middle;
+}
+.details-btn{
+	margin-top: 20px;
+}
+.commodity-details p{
+	text-indent:2em;
+	font-size: 15px;
+	margin-top: 10px;
+}
+#commodity_details_slide img{
+	height: 200px;
+	width: 100%;
+}
+
+
+
+
+#manageLogin-bki{
+	background-image:url(../img/bg-1.jpg)
+}
+.manageLogin-mian{
+	margin-top: 350px;
+	padding: 10px 20px 20px 20px;
+	width: 350px;
+	background: rgba(213,215,222,0.9);
+}
+.manageLogin-mian .input-group{
+	margin-top: 20px;
+	height: 40px;
+}
+.manageLogin-mian input{
+	height: 40px;
+}
+.manageLogin-mian button{
+	width: 100%;
+	margin-top: 20px;
+}
+
+.manage-head{
+	padding: 15px 20px 15px 30px;
+	background-color: #1a2732;
+}
+.manage-head a{
+	color: #00a0df;
+	font-size: 18px;
+}
+.manage-head a:hover{
+	text-decoration: none;
+}
+.manage-head span{
+	color: #fed189 !important;
+	font-size: 26px !important; 
+}
+.manage-body-left{
+	width: 250px;
+    height: 100%;
+    position: fixed;
+	padding-left: 0px;
+	padding-right: 0px;
+	color: #d0d8df;
+	background-color: #394a59;
+}
+.manage-body-left .list-group{
+	margin-bottom: 0px;
+}
+.manage-body-left li{
+	background-color: #394a59;
+}
+
+.manage-body-right{
+	margin-left: 250px;
+	background-color:#D5D7DE;
+}

@@ -24,14 +24,14 @@ public class CategoryServiceImpl implements ICategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    public ServerResponse addCategory(String categoryName,Integer parentId){
-        if (parentId == null || StringUtils.isBlank(categoryName)){
+    public ServerResponse addCategory(String categoryName){
+        if (StringUtils.isBlank(categoryName)){
             return ServerResponse.createByErrorMessage("添加品类参数错误");
         }
 
         Category category = new Category();
         category.setName(categoryName);
-        category.setParentId(parentId);
+        category.setParentId(0);
         category.setStatus(true);  // 这个分类是可用的
 
         int rowCount = categoryMapper.insert(category);
@@ -64,7 +64,13 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return ServerResponse.createBySuccess(categoryList);
     }
-
+    public ServerResponse<List<Category>> getCategory(){
+        List<Category> categoryList = categoryMapper.selectCategory();
+        if (CollectionUtils.isEmpty(categoryList)){
+            logger.info("分类为空");
+        }
+        return ServerResponse.createBySuccess(categoryList);
+    }
     // 递归查询本节点的id及孩子节点的id
     public ServerResponse<List<Integer>> selectCategoryAndChildenById(Integer categoryId){
         Set<Category> categorySet = Sets.newHashSet();

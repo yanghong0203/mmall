@@ -19,6 +19,7 @@ import com.mmall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Period;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class ProductServiceImpl implements IProductService {
                     return ServerResponse.createByErrorMessage("更新产品失败");
                 }
             }else {
+
                 int rowCount = productMapper.insert(product);
                 if (rowCount > 0){
                     return ServerResponse.createBySuccess("新增产品成功");
@@ -149,6 +151,7 @@ public class ProductServiceImpl implements IProductService {
         productListVo.setPrice(product.getPrice());
         productListVo.setSubtitle(product.getSubtitle());
         productListVo.setStatus(product.getStatus());
+        productListVo.setStock(product.getStock());
         return productListVo;
     }
 

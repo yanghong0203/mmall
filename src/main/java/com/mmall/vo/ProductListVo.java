@@ -15,9 +15,19 @@ public class ProductListVo {
 
     private BigDecimal price;
 
+    private Integer stock;
+
     private Integer status;
 
     private String imageHost;
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
     public Integer getId() {
         return id;

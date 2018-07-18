@@ -123,4 +123,10 @@
     from mmall_category
     where parent_id = #{parentId}
   </select>
+  <select id="selectCategory" resultMap="BaseResultMap" parameterType="int">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_category
+  </select>
+
 </mapper>

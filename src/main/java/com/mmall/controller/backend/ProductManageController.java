@@ -38,7 +38,7 @@ public class ProductManageController {
 
     @RequestMapping("save.do")
     @ResponseBody
-    public ServerResponse productSave(HttpSession session,Product product){
+    public ServerResponse productSave(HttpSession session,Product product,@RequestParam("imgs") MultipartFile[] imgs,HttpServletRequest request){
 
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null){
@@ -47,6 +47,14 @@ public class ProductManageController {
         }
         if (iUserService.checkAdminRole(user).isSuccess()){
             // 填充我们新增加产品的业务逻辑
+            if (imgs != null){
+                String path = request.getSession().getServletContext().getRealPath("upload");
+                StringBuilder subImages = new StringBuilder("");
+                for (MultipartFile file : imgs){
+                    subImages.append(iFileService.upload(file,path)+",");
+                }
+                product.setSubImages(subImages.toString());
+            }
             return iProductService.saveOrUpdateProduct(product);
         }else {
             return ServerResponse.createByErrorMessage("无权限操作");
