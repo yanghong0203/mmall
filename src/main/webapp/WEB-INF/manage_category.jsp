@@ -108,8 +108,7 @@
 									</td>
 									<td>
 										<div class="btn-group" role="group">
-											<button type="button" class="btn btn-primary" id="${category.id}" onclick="modify('${category.id}')">修改</button>
-											<button type="button" class="btn btn-danger">刪除</button>
+											<button type="button" class="btn btn-primary" id="btn${category.id}" onclick="modify('${category.id}')">修改</button>
 										</div>
 									</td>
 								</tr>
@@ -121,30 +120,59 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+            var oldname;
+            var oldstatus;
 			function modify(id) {
-				var bt = $("#"+id);
+				var bt = $("#btn"+id);
 				var thisTr = bt.parent().parent().parent();
-				for(var i = 1; i<= thisTr.children().length-3;i++){
-					var tdValue = thisTr.children("td").eq(i).html();
-					thisTr.children("td").eq(i).html("<input type='text' class='form-control' value='"+tdValue+"'>");
-				}
-				thisTr.children("td").eq(thisTr.children().length-2).html("<select class='form-control'><option>上架</option><option>下架</option></select>");
+				var tdValue = thisTr.children("td").eq(1).html();
+				oldname = tdValue;
+				oldstatus = thisTr.children("td").eq(2).html();
+				thisTr.children("td").eq(1).html("<input type='text' id='name"+id+"' class='form-control' value='"+tdValue+"'>");
+				thisTr.children("td").eq(2).html("<select class='form-control' id='status"+id+"'><option value='1'>可用</option><option value='0'>不可用</option></select>");
 				bt.html("保存");
 				bt.attr("onclick","save('"+id+"')");
 			}
 			function save(id){
-				var bt = $("#"+id);
-				var thisTr = bt.parents("tr");
-				console.log(thisTr.children().length);
-				for(var i = 1; i <= thisTr.children().length-3; i++) {
-					var tdValue = thisTr.children("td").eq(i).find("input").val();
-					thisTr.children("td").eq(i).html(tdValue);
-				}
-				var tdValue = thisTr.children("td").eq(thisTr.children().length-2).find("select option:selected").text();
-				thisTr.children("td").eq(i).html(tdValue);
-				bt.html("修改");
-				bt.attr("onclick", "modify('"+id+"')");
+                var data = "id="+id+"&name="+$("#name"+id).val()+"&status="+$("#status"+id+" option:selected").val();
+                $.ajax({
+                    type:"post",
+                    url:"/manage/category/update.do",
+                    data: data,
+                    success:function (result) {
+                        if (result.status == 0){
+                            alert(result.data);
+                            change(id);
+                        }else {
+                            alert(result.data);
+                            noChange(id);
+                        }
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+
+                });
+                return false;
 			}
+            function change(id) {
+                var bt = $("#btn"+id);
+                var thisTr = bt.parents("tr");
+				var tdValue = thisTr.children("td").eq(1).find("input").val();
+				thisTr.children("td").eq(1).html(tdValue);
+                var tdValue = thisTr.children("td").eq(2).find("select option:selected").text();
+                thisTr.children("td").eq(2).html(tdValue);
+                bt.html("修改");
+                bt.attr("onclick", "modify('"+id+"')");
+            }
+            function noChange(id) {
+                var bt = $("#btn"+id);
+                var thisTr = bt.parents("tr");
+				thisTr.children("td").eq(1).html(oldname);
+                thisTr.children("td").eq(2).html(oldstatus);
+                bt.html("修改");
+                bt.attr("onclick", "modify('"+id+"')");
+            }
 			function  addcategory() {
                 $.ajax({
                     type:"post",
@@ -162,7 +190,6 @@
                     error:function () {
                         alert("添加品类失败");
                     }
-
                 });
             }
 		</script>

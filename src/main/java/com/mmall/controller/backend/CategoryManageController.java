@@ -3,6 +3,7 @@ package com.mmall.controller.backend;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
+import com.mmall.pojo.Category;
 import com.mmall.pojo.User;
 import com.mmall.service.ICategoryService;
 import com.mmall.service.IUserService;
@@ -42,17 +43,17 @@ public class CategoryManageController {
         }
     }
 
-    // 更新品类名
-    @RequestMapping("set_category_name.do")
+    // 更新品类
+    @RequestMapping("update.do")
     @ResponseBody
-    public ServerResponse setCategoryName(HttpSession session,Integer categoryId,String categoryName){
+    public ServerResponse setCategoryName(HttpSession session, Category category){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if (user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
         if (iUserService.checkAdminRole(user).isSuccess()){
             //更新categoryName
-            return iCategoryService.updateCategoryName(categoryId,categoryName);
+            return iCategoryService.updateCategory(category);
         }else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }

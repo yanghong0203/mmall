@@ -46,7 +46,7 @@ public class ProductServiceImpl implements IProductService {
                 }
             }
             if (product.getId() != null){
-                int rowCount = productMapper.updateByPrimaryKey(product);
+                int rowCount = productMapper.updateByPrimaryKeySelective(product);
                 if (rowCount > 0){
                     return ServerResponse.createBySuccess("更新产品成功");
                 }else {
@@ -64,6 +64,8 @@ public class ProductServiceImpl implements IProductService {
        }
        return ServerResponse.createByErrorMessage("新增或更新产品参数不正确");
     }
+
+
 
     public ServerResponse<String> setSaleStatus(Integer productId,Integer status){
         if (productId == null || status == null){

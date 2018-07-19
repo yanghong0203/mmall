@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -10,6 +11,7 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
 		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.form.js"></script>
 		<script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
 	</head>
 
@@ -62,7 +64,7 @@
 						<li class="active">添加商品</li>
 					</ol>
 					<div class="col-md-6 col-md-offset-3">
-						<form class="form-horizontal" id="product" method="post" enctype="multipart/form-data">
+						<form class="form-horizontal" action="/manage/product/save.do" id="product" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label  class="col-sm-2 control-label">商品名称</label>
 								<div class="col-sm-8">
@@ -72,7 +74,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品描述</label>
 								<div class="col-sm-8">
-									<input type="password" class="form-control" name="subtitle">
+									<input type="text" class="form-control" name="subtitle">
 								</div>
 							</div>
 							<div class="form-group">
@@ -132,7 +134,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label"></label>
 								<div class="col-sm-8">
-									<button class="btn bg-primary" type="button" onclick="addproduct()">提交</button>
+									<button class="btn bg-primary" type="button" onclick="return sub()">提交</button>
 								</div>
 							</div>
 						</form>
@@ -140,6 +142,18 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+            function sub(){
+                // jquery 表单提交
+                $("#product").ajaxSubmit(function(result) {
+                    if (result.status == 0) {
+                        $("#product")[0].reset();
+					}
+                    alert(result.data);
+                });
+                return false;
+            }
+		</script>
 	</body>
 
 </html>

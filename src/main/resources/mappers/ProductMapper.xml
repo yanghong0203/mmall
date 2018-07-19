@@ -181,6 +181,7 @@
     select
     <include refid="Base_Column_List"/>
     from mmall_product
+    where status != 3
     order by id asc
   </select>
 

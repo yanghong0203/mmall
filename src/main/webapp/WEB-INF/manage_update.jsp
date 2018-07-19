@@ -1,5 +1,6 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -7,6 +8,7 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
 		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.form.js"></script>
 		<script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
 	</head>
 
@@ -54,35 +56,43 @@
 							<span>商品</span>
 						</li>
 						<li>
-							<a href="#">商品管理</a>
+							<a href="/manage/view/index">商品管理</a>
 						</li>
-						<li>
-							<a href="#">更新商品</a>
+						<li class="active">
+							更新商品
 						</li>
 					</ol>
 					<div class="col-md-6 col-md-offset-3">
-						<form class="form-horizontal" action="/manage/product/save.do.do" method="post" enctype="multipart/form-data">
+						<form class="form-horizontal" action="/manage/product/save.do" id="updateProduct" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="id" value="${productVo.id}">
 							<div class="form-group">
 								<label  class="col-sm-2 control-label">商品名称</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="name">
+									<input type="text" class="form-control" name="name" value="${productVo.name}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品描述</label>
 								<div class="col-sm-8">
-									<input type="password" class="form-control" name="subtitle">
+									<input type="text" class="form-control" name="subtitle" value="${productVo.subtitle}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">所属分类</label>
 								<div class="col-sm-8">
 									<select class="form-control" name="categoryId">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+										<c:forEach items="${categoryList}" var="category">
+											<c:choose>
+												<c:when test="${category.status == true} && ${category.id == productVo.categoryId}">
+													<option value="${category.id}" selected="selected"> ${category.name} </option>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${category.status == true}">
+														<option value="${category.id}"> ${category.name}</option>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
@@ -90,7 +100,7 @@
 								<label class="col-sm-2 control-label">商品价格</label>
 								<div class="col-sm-8">
 									<div class="input-group">
-										<input type="text" class="form-control" name="price">
+										<input type="text" class="form-control" name="price" value="${productVo.price}">
 										<span class="input-group-addon">元</span>
 									</div>
 								</div>
@@ -99,7 +109,7 @@
 								<label class="col-sm-2 control-label">商品库存</label>
 								<div class="col-sm-8">
 									<div class="input-group">
-										<input type="text" class="form-control" name="stock">
+										<input type="text" class="form-control" name="stock" value="${productVo.stock}">
 										<span class="input-group-addon">件</span>
 									</div>
 								</div>
@@ -131,7 +141,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label"></label>
 								<div class="col-sm-8">
-									<button class="btn bg-primary" type="submit">提交</button>
+									<button class="btn bg-primary" type="button" onclick="return sub()">提交</button>
 								</div>
 							</div>
 						</form>
@@ -139,7 +149,18 @@
 				</div>
 			</div>
 		</div>
-
+		<script type="text/javascript">
+            function sub(){
+                // jquery 表单提交
+                $("#updateProduct").ajaxSubmit(function(result) {
+                    if (result.status == 0) {
+                        alert(result.data);
+                        window.location.href='/manage/view/index'
+                    }
+                });
+                return false;
+            }
+		</script>
 	</body>
 
 </html>

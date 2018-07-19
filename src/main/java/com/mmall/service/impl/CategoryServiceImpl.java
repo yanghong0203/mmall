@@ -41,20 +41,15 @@ public class CategoryServiceImpl implements ICategoryService {
         return ServerResponse.createByErrorMessage("添加品类失败");
     }
 
-    public ServerResponse updateCategoryName(Integer categoryId,String categoryName){
-        if (categoryId == null || StringUtils.isBlank(categoryName)){
+    public ServerResponse updateCategory(Category category){
+        if (category.getId() == null ){
             return ServerResponse.createByErrorMessage("更新品类参数错误");
         }
-
-        Category category = new Category();
-        category.setName(categoryName);
-        category.setId(categoryId);
-
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
         if (rowCount > 0){
-            return  ServerResponse.createBySuccess("更新品类名成功");
+            return  ServerResponse.createBySuccess("更新品类成功");
         }
-        return ServerResponse.createByErrorMessage("更新品类名失败");
+        return ServerResponse.createByErrorMessage("更新品类失败");
     }
 
     public ServerResponse<List<Category>> getChildenParallelCategory(Integer categoryId){

@@ -127,6 +127,7 @@
     select
     <include refid="Base_Column_List" />
     from mmall_category
+    where status != 3
   </select>
 
 </mapper>

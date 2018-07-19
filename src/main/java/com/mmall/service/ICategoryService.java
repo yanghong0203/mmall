@@ -9,7 +9,7 @@ public interface ICategoryService {
 
     ServerResponse addCategory(String categoryName);
 
-    ServerResponse updateCategoryName(Integer categoryId,String categoryName);
+    ServerResponse updateCategory(Category category);
 
     ServerResponse<List<Category>> getChildenParallelCategory(Integer categoryId);
 

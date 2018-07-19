@@ -85,14 +85,14 @@
 									<td><c:if test="${product.status == 1}">
 											上架
 										</c:if>
-										<c:if test="${product.status == 0}">
+										<c:if test="${product.status == 2}">
 											下架
 										</c:if>
 									</td>
 									<td>
 										<div class="btn-group" role="group">
-											<button type="button" class="btn btn-primary" id="${product.id}" onclick="modify('${product.id}')">修改</button>
-											<button type="button" class="btn btn-info" onclick="window.location.href='manage_update.jsp?productId=${product.id}'">修改详情</button>
+											<button type="button" class="btn btn-primary" id="btn${product.id}" onclick="modify('${product.id}')">修改</button>
+											<button type="button" class="btn btn-info"><a href="/manage/view/update?productId=${product.id}">修改详情</a></button>
 											<button type="button" class="btn btn-danger" onclick="deleteProduct('${product.id}')">刪除</button>
 										</div>
 									</td>
@@ -104,33 +104,96 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+			/*function product() {
+				var name;
+				var categoryId;
+				var price;
+				var stock;
+				var status;
+            }*/
+            var old = new Array(5);
 			function modify(id) {
-				var bt = $("#"+id);
+				var bt = $("#btn"+id);
 				var thisTr = bt.parent().parent().parent();
+				var product = new Array("name","categoryId","price","stock");
 				for(var i = 1; i<= thisTr.children().length-3;i++){
 					var tdValue = thisTr.children("td").eq(i).html();
-					thisTr.children("td").eq(i).html("<input type='text' class='form-control' value='"+tdValue+"'>");
+					old[i-1] = tdValue;
+					thisTr.children("td").eq(i).html("<input type='text' name='"+product[i-1]+"' id='"+product[i-1]+id+"' class='form-control' value='"+tdValue+"'>");
 				}
-				thisTr.children("td").eq(thisTr.children().length-2).html(" <select class='form-control'><option>上架</option><option>下架</option></select>");
+				old[4] = thisTr.children("td").eq(i).html();
+				thisTr.children("td").eq(thisTr.children().length-2).html(" <select class='form-control' id='status"+id+"' name='status'><option value='1'>上架</option><option value='2'>下架</option></select>");
 				bt.html("保存");
 				bt.attr("onclick","save('"+id+"')");
 			}
 			function save(id){
-				var bt = $("#"+id);
-				var thisTr = bt.parents("tr");
-				console.log(thisTr.children().length);
-				for(var i = 1; i <= thisTr.children().length-3; i++) {
-					var tdValue = thisTr.children("td").eq(i).find("input").val();
-					thisTr.children("td").eq(i).html(tdValue);
-				}
-				var tdValue = thisTr.children("td").eq(thisTr.children().length-2).find("select option:selected").text();
-				thisTr.children("td").eq(i).html(tdValue);
-				bt.html("修改");
-				bt.attr("onclick", "modify('"+id+"')");
+			    var data = "id="+id+"&name="+$("#name"+id).val()+"&categoryId="+$("#categoryId"+id).val()+"&price="+$("#price"+id).val()+"&stock="+$("#stock"+id).val()+"&status="+$("#status"+id+" option:selected").val();
+                $.ajax({
+                    type:"post",
+                    url:"/manage/product/update.do",
+                    data: data,
+                    success:function (result) {
+                        if (result.status == 0){
+                            alert(result.data);
+                            change(id);
+                        }else {
+                            alert(result.data);
+                            noChange(id);
+                        }
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+
+                });
+                return false;
 			}
 			function deleteProduct(id) {
+			    var data = "productId="+id+"&status=3"
+                $.ajax({
+                    type:"post",
+                    url:"/manage/product/set_sale_status.do",
+                    data:data ,
+                    success:function (result) {
+                        if (result.status == 0){
+                            alert("删除产品成功");
+                            var bt = $("#btn"+id);
+                            var thisTr = bt.parent().parent().parent();
+                            thisTr.remove();
+                        }else {
+                            alert("删除产品失败");
+                        }
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
 
+                });
+                return false;
             }
+			function change(id) {
+                var bt = $("#btn"+id);
+                var thisTr = bt.parents("tr");
+                for(var i = 1; i <= thisTr.children().length-3; i++) {
+                    var tdValue = thisTr.children("td").eq(i).find("input").val();
+                    thisTr.children("td").eq(i).html(tdValue);
+                }
+                var tdValue = thisTr.children("td").eq(thisTr.children().length-2).find("select option:selected").text();
+                thisTr.children("td").eq(i).html(tdValue);
+                bt.html("修改");
+                bt.attr("onclick", "modify('"+id+"')");
+            }
+            function noChange(id) {
+                var bt = $("#btn"+id);
+                var thisTr = bt.parents("tr");
+                console.log(thisTr.children().length);
+                for(var i = 0; i < old.length; i++) {
+                    thisTr.children("td").eq(i+1).html(old[i]);
+                }
+                bt.html("修改");
+                bt.attr("onclick", "modify('"+id+"')");
+            }
+
 		</script>
 	</body>
 
