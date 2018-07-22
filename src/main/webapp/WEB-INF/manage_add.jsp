@@ -10,9 +10,14 @@
 		<title></title>
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../simditor-2.3.5/styles/simditor.css" />
 		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.form.js"></script>
 		<script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../simditor-2.3.5/scripts/module.min.js"></script>
+		<script type="text/javascript" src="../../simditor-2.3.5/scripts/hotkeys.min.js"></script>
+		<script type="text/javascript" src="../../simditor-2.3.5/scripts/uploader.js"></script>
+		<script type="text/javascript" src="../../simditor-2.3.5/scripts/simditor.js"></script>
 	</head>
 
 	<body>
@@ -63,23 +68,23 @@
 						</li>
 						<li class="active">添加商品</li>
 					</ol>
-					<div class="col-md-6 col-md-offset-3">
+					<div class="col-md-10 col-md-offset-1">
 						<form class="form-horizontal" action="/manage/product/save.do" id="product" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label  class="col-sm-2 control-label">商品名称</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="text" class="form-control" name="name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品描述</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="text" class="form-control" name="subtitle">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">所属分类</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<select class="form-control" name="categoryId">
 										<c:forEach items="${data}" var="category">
 											<c:if test="${category.status == true}">
@@ -91,7 +96,7 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品价格</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<div class="input-group">
 										<input type="text" class="form-control" name="price">
 										<span class="input-group-addon">元</span>
@@ -100,7 +105,7 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品库存</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<div class="input-group">
 										<input type="text" class="form-control" name="stock">
 										<span class="input-group-addon">件</span>
@@ -109,31 +114,37 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品主图</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品附图</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品附图</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品附图</label>
-								<div class="col-sm-8">
+								<div class="col-sm-4">
 									<input type="file" name="imgs">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品详情</label>
+								<div class="col-sm-10">
+									<textarea id="editor" autofocus name="detail"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label"></label>
-								<div class="col-sm-8">
+								<div class="col-sm-10">
 									<button class="btn bg-primary" type="button" onclick="return sub()">提交</button>
 								</div>
 							</div>
@@ -148,11 +159,33 @@
                 $("#product").ajaxSubmit(function(result) {
                     if (result.status == 0) {
                         $("#product")[0].reset();
-					}
+                    }
                     alert(result.data);
                 });
                 return false;
             }
+            $(function() {
+                toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
+                    'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
+                    'link', 'image', 'hr', '|', 'indent', 'outdent'
+                ];
+                var editor = new Simditor({
+                    textarea: $('#editor'),
+                    placeholder: '这里输入内容...',
+                    toolbar: toolbar, //工具栏
+                    upload: {
+                        url: '/manage/product/richtext_img_upload.do', //文件上传的接口地址
+                        fileKey: 'upload_file'
+                    },success:(function(_this) {
+                    return function(result) {
+                        var newresult = JSON.parse("{'file_path':"+result.file_path+"}");
+                        _this.trigger('uploadprogress', [file, file.size, file.size]);
+                        _this.trigger('uploadsuccess', [file, newresult]);
+                        return $(document).trigger('uploadsuccess', [file, newresult, _this]);
+                    };
+                })(this)
+                });
+            })
 		</script>
 	</body>
 

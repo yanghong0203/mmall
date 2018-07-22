@@ -54,6 +54,7 @@ public class ProductManageController {
                     subImages.append(iFileService.upload(file,path)+",");
                 }
                 product.setSubImages(subImages.toString());
+                product.setStatus(1);
             }
             return iProductService.saveOrUpdateProduct(product);
         }else {
@@ -190,7 +191,7 @@ public class ProductManageController {
                 resultMap.put("msg","上传失败");
                 return resultMap;
             }
-            String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
+            String url = PropertiesUtil.getProperty("ftp.server.http.perfix")+targetFileName;
             resultMap.put("success",true);
             resultMap.put("msg","上传成功");
             resultMap.put("file_path",url);
