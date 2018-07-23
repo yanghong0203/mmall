@@ -39,28 +39,30 @@ public class ProductManageController {
     @RequestMapping("save.do")
     @ResponseBody
     public ServerResponse productSave(HttpSession session,Product product,@RequestParam(value = "imgs",required = false) MultipartFile[] imgs,HttpServletRequest request){
-
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录管理员");
-
         }
         if (iUserService.checkAdminRole(user).isSuccess()){
             // 填充我们新增加产品的业务逻辑
             if (imgs != null){
                 String path = request.getSession().getServletContext().getRealPath("upload");
+                product.setMainImage(iFileService.upload(imgs[0],path));
                 StringBuilder subImages = new StringBuilder("");
-                for (MultipartFile file : imgs){
-                    subImages.append(iFileService.upload(file,path)+",");
+                if (imgs.length > 1){
+                    for (int i=1;i<imgs.length;i++){
+                        subImages.append(iFileService.upload(imgs[i],path)+",");
+                    }
+                    product.setSubImages(subImages.toString());
                 }
-                product.setSubImages(subImages.toString());
-                product.setStatus(1);
             }
+            product.setStatus(1);
             return iProductService.saveOrUpdateProduct(product);
         }else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
+
     @RequestMapping("update.do")
     @ResponseBody
     public ServerResponse productupdate(HttpSession session,Product product){

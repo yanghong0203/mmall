@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>更新商品</title>
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
 		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
@@ -97,6 +97,18 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-2 control-label">主页分类</label>
+								<div class="col-sm-4">
+									<select class="form-control" name="indexStatus">
+										<option value="0">普通商品</option>
+										<option value="1">轮播商品</option>
+										<option value="2">新品推荐</option>
+										<option value="3">限时商品</option>
+										<option value="4">热门商品</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">商品价格</label>
 								<div class="col-sm-8">
 									<div class="input-group">
@@ -115,25 +127,31 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品主图</label>
+								<label class="col-sm-2 control-label">商品主页图片</label>
 								<div class="col-sm-8">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-8">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-8">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
+								<div class="col-sm-8">
+									<input type="file" name="imgs">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-8">
 									<input type="file" name="imgs">
 								</div>
@@ -156,7 +174,9 @@
                     if (result.status == 0) {
                         alert(result.data);
                         window.location.href='/manage/view/index'
-                    }
+                    }else {
+                        alert("更新失败");
+					}
                 });
                 return false;
             }

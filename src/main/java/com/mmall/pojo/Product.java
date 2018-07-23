@@ -22,13 +22,15 @@ public class Product {
 
     private Integer stock;
 
+    private Integer indexStatus;
+
     private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
+    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock,Integer indexStatus, Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -38,6 +40,7 @@ public class Product {
         this.detail = detail;
         this.price = price;
         this.stock = stock;
+        this.indexStatus = indexStatus;
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -109,6 +112,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getIndexStatus() {
+        return indexStatus;
+    }
+
+    public void setIndexStatus(Integer indexStatus) {
+        this.indexStatus = indexStatus;
     }
 
     public Integer getStock() {

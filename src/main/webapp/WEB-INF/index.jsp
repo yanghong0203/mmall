@@ -1,103 +1,90 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<title>青木良品</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<title>羚羊数码</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
 		    <div class="container">
-		    <div class="navbar-header">
-		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		        </button>
-		        <a class="navbar-brand" href="index.html"><img src="img/logo.png" class="logo"></a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
-		        <ul class="nav navbar-nav">
-		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
-		        </ul>
-		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
-		        	<li><a href="register.html">注册</a></li>
-		        	<li><a href="sign_in.html">登录</a></li>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
-		        </ul>
-		    </div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/index"><img src="img/logo.png" class="logo"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/index">首页</a></li>
+						<li><a href="list.html">所有商品</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="search.html">搜索</a></li>
+						<li><a href="register.html">注册</a></li>
+						<li><a href="sign_in.html">登录</a></li>
+						<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+					</ul>
+				</div>
+			</div>
 		</nav>
-		<div class="carousel slide" id="carousel-821981">
+		<div class="carousel slide container" id="indexCarousel">
 			<ol class="carousel-indicators">
-				<li class="active" data-slide-to="0" data-target="#carousel-821981"></li>
-				<li data-slide-to="1" data-target="#carousel-821981"></li>
-				<li data-slide-to="2" data-target="#carousel-821981"></li>
+				<c:forEach items="${productList}" varStatus="status">
+					<c:if test="${status.first}">
+						<li class="active" data-slide-to="${status.index}" data-target="#indexCarousel"></li>
+					</c:if>
+					<li data-slide-to="${status.index}" data-target="#indexCarousel"></li>
+				</c:forEach>
 			</ol>
 			<div class="carousel-inner">
-				<div class="item active">
-					<a href="#" target="_blank"><img alt="" src="img/index_slide_1.png" /></a>
+				<c:forEach items="${productList}" var="product" varStatus="status">
+					<c:if test="${status.first}">
+						<div class="item active">
+							<a href="#" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
+						</div>
+					</c:if>
+					<div class="item">
+						<a href="#" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
+					</div>
+				</c:forEach>
+
+				<%--<div class="item">
+					<a href="#" target="_blank"><img alt="" src="img/index_slide_2.png" /></a>
 					<div class="carousel-caption">
 					</div>
 				</div>
 				<div class="item">
-					<a href="#" target="_blank"><img alt="" src="img/index_slide_2.png" /></a>
-				</div>
-				<div class="item">
 					<a href="#" target="_blank"><img alt="" src="img/index_slide_3.png" /></a>
-				</div>
+				</div>--%>
 			</div>
-			<a class="left carousel-control" href="#carousel-821981" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-			<a class="right carousel-control" href="#carousel-821981" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			<a class="left carousel-control" href="#indexCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+			<a class="right carousel-control" href="#indexCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>		
 		<div class="container">
 			<h2 class="index-title-center">新品推荐-精心挑选</h2>
 			<p class="index-title-center">居家必备实用小单品</p>
 			<hr />
 			<div class="row new-recommend" align="center">
-				<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
-					<div class="thumbnail">
-						<a href="commodity_details.html" target="_blank">
-							<img class="img-responsive" src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
+				<c:forEach items="${productList}" var="product">
+					<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
+						<div class="thumbnail">
+							<a href="commodity_details.html" target="_blank">
+								<img class="img-responsive" src="${product.imageHost}${product.subImage[0]}"/>
+								<h5>${product.name}</h5>
+								<p class="commodity-price">${product.price}</p>
+							</a>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
-					<div class="thumbnail">
-						<a href="commodity_details.html" target="_blank">
-							<img class="img-responsive" src="img/new2.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
-					<div class="thumbnail">
-						<a href="commodity_details.html" target="_blank">
-							<img class="img-responsive" src="img/new3.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
-					<div class="thumbnail">
-						<a href="commodity_details.html" target="_blank">
-							<img class="img-responsive" src="img/new4.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 			<h2 class="index-title-center">专题活动-限时促销</h2>
 			<p class="index-title-center">严选材质，用心设计，精致居家生活</p>

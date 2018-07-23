@@ -1,6 +1,8 @@
 package com.mmall.vo;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class ProductDetailVo {
 
@@ -9,7 +11,7 @@ public class ProductDetailVo {
     private String name;
     private String subtitle;
     private String mainImage;
-    private String subImage;
+    private String[] subImage;
     private String detail;
     private BigDecimal price;
     private Integer stock;
@@ -59,11 +61,11 @@ public class ProductDetailVo {
         this.mainImage = mainImage;
     }
 
-    public String getSubImage() {
+    public String[] getSubImage() {
         return subImage;
     }
 
-    public void setSubImage(String subImage) {
+    public void setSubImage(String[] subImage) {
         this.subImage = subImage;
     }
 

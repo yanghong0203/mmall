@@ -4,10 +4,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>添加商品</title>
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../../simditor-2.3.5/styles/simditor.css" />
@@ -95,6 +94,18 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-2 control-label">所属分类</label>
+								<div class="col-sm-4">
+									<select class="form-control" name="indexStatus">
+										<option value="0">普通商品</option>
+										<option value="1">轮播商品</option>
+										<option value="2">新品推荐</option>
+										<option value="3">限时商品</option>
+										<option value="4">热门商品</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">商品价格</label>
 								<div class="col-sm-4">
 									<div class="input-group">
@@ -113,25 +124,31 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品主图</label>
+								<label class="col-sm-2 control-label">商品主页图片</label>
 								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">商品附图</label>
+								<label class="col-sm-2 control-label">商品详情图片</label>
+								<div class="col-sm-4">
+									<input type="file" name="imgs">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
 									<input type="file" name="imgs">
 								</div>

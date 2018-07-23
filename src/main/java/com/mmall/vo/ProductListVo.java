@@ -13,9 +13,13 @@ public class ProductListVo {
 
     private String mainImage;
 
+    private String[] subImage;
+
     private BigDecimal price;
 
     private Integer stock;
+
+    private Integer indexStatus;
 
     private Integer status;
 
@@ -69,12 +73,28 @@ public class ProductListVo {
         this.mainImage = mainImage;
     }
 
+    public String[] getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(String[] subImage) {
+        this.subImage = subImage;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getIndexStatus() {
+        return indexStatus;
+    }
+
+    public void setIndexStatus(Integer indexStatus) {
+        this.indexStatus = indexStatus;
     }
 
     public Integer getStatus() {

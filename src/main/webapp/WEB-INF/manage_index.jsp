@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>商品管理</title>
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
 		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
@@ -66,10 +66,11 @@
 						<thead>
 							<tr >
 								<th class="col-md-1">商品ID</th>
-								<th class="col-md-5">商品名</th>
+								<th class="col-md-4">商品名</th>
 								<th class="col-md-1">类别</th>
 								<th class="col-md-1">价格</th>
 								<th class="col-md-1">库存</th>
+								<th class="col-md-1">主页状态</th>
 								<th class="col-md-1">状态</th>
 								<th class="col-md-2">操作</th>
 							</tr>
@@ -82,6 +83,22 @@
 									<td>${product.categoryId}</td>
 									<td>${product.price}</td>
 									<td>${product.stock}</td>
+									<td><c:if test="${product.indexStatus == 0}">
+											普通商品
+										</c:if>
+										<c:if test="${product.indexStatus == 1}">
+											轮播商品
+										</c:if>
+										<c:if test="${product.indexStatus == 2}">
+											新品推荐
+										</c:if>
+										<c:if test="${product.indexStatus == 3}">
+											限时促销
+										</c:if>
+										<c:if test="${product.indexStatus == 4}">
+											热门商品
+										</c:if>
+									</td>
 									<td><c:if test="${product.status == 1}">
 											上架
 										</c:if>
@@ -111,23 +128,25 @@
 				var stock;
 				var status;
             }*/
-            var old = new Array(5);
+            var old = new Array(6);
 			function modify(id) {
 				var bt = $("#btn"+id);
 				var thisTr = bt.parent().parent().parent();
 				var product = new Array("name","categoryId","price","stock");
-				for(var i = 1; i<= thisTr.children().length-3;i++){
+				for(var i = 1; i<= thisTr.children().length-4;i++){
 					var tdValue = thisTr.children("td").eq(i).html();
 					old[i-1] = tdValue;
 					thisTr.children("td").eq(i).html("<input type='text' name='"+product[i-1]+"' id='"+product[i-1]+id+"' class='form-control' value='"+tdValue+"'>");
 				}
 				old[4] = thisTr.children("td").eq(i).html();
-				thisTr.children("td").eq(thisTr.children().length-2).html(" <select class='form-control' id='status"+id+"' name='status'><option value='1'>上架</option><option value='2'>下架</option></select>");
+				thisTr.children("td").eq(i).html(" <select class='form-control' id='indexStatus"+id+"' name='indexStatus'><option value='0'>普通商品</option><option value='1'>轮播商品</option><option value='2'>新品推荐</option><option value='3'>限时促销</option><option value='4'>热门商品</option></select>");
+                old[5] = thisTr.children("td").eq(++i).html();
+                thisTr.children("td").eq(i).html(" <select class='form-control' id='status"+id+"' name='status'><option value='1'>上架</option><option value='2'>下架</option></select>");
 				bt.html("保存");
 				bt.attr("onclick","save('"+id+"')");
 			}
 			function save(id){
-			    var data = "id="+id+"&name="+$("#name"+id).val()+"&categoryId="+$("#categoryId"+id).val()+"&price="+$("#price"+id).val()+"&stock="+$("#stock"+id).val()+"&status="+$("#status"+id+" option:selected").val();
+			    var data = "id="+id+"&name="+$("#name"+id).val()+"&categoryId="+$("#categoryId"+id).val()+"&price="+$("#price"+id).val()+"&stock="+$("#stock"+id).val()+"&indexStatus="+$("#indexStatus"+id+" option:selected").val()+"&status="+$("#status"+id+" option:selected").val();
                 $.ajax({
                     type:"post",
                     url:"/manage/product/update.do",
@@ -174,11 +193,13 @@
 			function change(id) {
                 var bt = $("#btn"+id);
                 var thisTr = bt.parents("tr");
-                for(var i = 1; i <= thisTr.children().length-3; i++) {
+                for(var i = 1; i <= thisTr.children().length-4; i++) {
                     var tdValue = thisTr.children("td").eq(i).find("input").val();
                     thisTr.children("td").eq(i).html(tdValue);
                 }
-                var tdValue = thisTr.children("td").eq(thisTr.children().length-2).find("select option:selected").text();
+                var tdValue = thisTr.children("td").eq(i).find("select option:selected").text();
+                thisTr.children("td").eq(i).html(tdValue);
+                var tdValue = thisTr.children("td").eq(++i).find("select option:selected").text();
                 thisTr.children("td").eq(i).html(tdValue);
                 bt.html("修改");
                 bt.attr("onclick", "modify('"+id+"')");

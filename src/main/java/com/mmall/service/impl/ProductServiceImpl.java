@@ -39,12 +39,12 @@ public class ProductServiceImpl implements IProductService {
 
     public ServerResponse saveOrUpdateProduct(Product product){
        if (product != null){
-            if (StringUtils.isNotBlank(product.getSubImages())){
+            /*if (StringUtils.isNotBlank(product.getSubImages())){
                 String[] subImageArray = product.getSubImages().split(",");
                 if (subImageArray.length > 0){
                     product.setMainImage(subImageArray[0]);
                 }
-            }
+            }*/
             if (product.getId() != null){
                 int rowCount = productMapper.updateByPrimaryKeySelective(product);
                 if (rowCount > 0){
@@ -102,7 +102,7 @@ public class ProductServiceImpl implements IProductService {
         productDetailVo.setSubtitle(product.getSubtitle());
         productDetailVo.setPrice(product.getPrice());
         productDetailVo.setMainImage(product.getMainImage());
-        productDetailVo.setSubImage(product.getSubImages());
+        productDetailVo.setSubImage(product.getSubImages().split(","));
         productDetailVo.setCategoryId(product.getCategoryId());
         productDetailVo.setDetail(product.getDetail());
         productDetailVo.setStatus(product.getStatus());
@@ -112,7 +112,7 @@ public class ProductServiceImpl implements IProductService {
         // parentCategoryId
         // createTime
         // updateTime
-        productDetailVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix","http://img.happymmall.com/"));
+        productDetailVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix","http://img.youngh.cn/"));
 
         Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
         if (category == null){
@@ -150,8 +150,10 @@ public class ProductServiceImpl implements IProductService {
         productListVo.setCategoryId(product.getCategoryId());
         productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix","http://img.happymmall.com/"));
         productListVo.setMainImage(product.getMainImage());
+        productListVo.setSubImage(product.getSubImages().split(","));
         productListVo.setPrice(product.getPrice());
         productListVo.setSubtitle(product.getSubtitle());
+        productListVo.setIndexStatus(product.getIndexStatus());
         productListVo.setStatus(product.getStatus());
         productListVo.setStock(product.getStock());
         return productListVo;
@@ -232,5 +234,19 @@ public class ProductServiceImpl implements IProductService {
         pageInfo.setList(productListVoList);
         return ServerResponse.createBySuccess(pageInfo);
     }
+
+    public ServerResponse getIndexProduct () {
+        // startPage--记录开始
+        // 填充自己的SQL查询逻辑
+        // pageHelper--收尾
+        List<Product> productList = productMapper.selectIndexList();
+        List<ProductListVo> productListVoList = Lists.newArrayList();
+        for (Product productItem : productList){
+            ProductListVo productListVo = assembleProductListVo(productItem);
+            productListVoList.add(productListVo);
+        }
+        return ServerResponse.createBySuccess(productListVoList);
+    }
+
 
 }
