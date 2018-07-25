@@ -1,5 +1,9 @@
+<%@ page import="com.mmall.common.Const" %>
+<%@ page import="com.mmall.pojo.User" %>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,11 +33,20 @@
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
 		        	<li><a href="search.html">搜索</a></li>
-		        	<li><a href="register.html">注册</a></li>
-		        	<li><a href="sign_in.html">登录</a></li>
+					<%
+						if (user == null)
+						{%>	<li><a href="/register">注册</a></li>
+					<li><a href="/login">登录</a></li>
+					<%}
+					else
+					{%>	<li><a href="/user_index"><%=user.getUsername()%></a></li>
+					<li><a href="/logout">注销</a>
+							<%}
+					%>
 		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
 		        </ul>
 		    </div>
+			</div>
 		</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">

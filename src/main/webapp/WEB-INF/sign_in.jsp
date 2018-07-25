@@ -1,13 +1,17 @@
+<%@ page import="com.mmall.common.Const" %>
+<%@ page import="com.mmall.pojo.User" %>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
 		<title>用户登录</title>
 	</head>
 	<body>
@@ -19,27 +23,26 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		        </button> 
-		        <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo"></a>
+		        <a class="navbar-brand" href="/index"><img src="img/logo.png" class="logo"></a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">
-		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
+					<li><a href="/index">首页</a></li>
+		            <li><a href="/list">所有商品</a></li>
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
-		        	<li><a href="register.html">注册</a></li>
-		        	<li><a href="sign_in.html">登录</a></li>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="search">搜索</a></li>
+
+		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
 		        </ul>
 		    </div>
+			</div>
 		</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">用户登录</a>
@@ -49,11 +52,11 @@
 					<div class="page-header">
 						<h3 class="text-left">用户登录</h3>
 					</div>
-  					<form class="form-horizontal" role="form" method="post">
+  					<form class="form-horizontal" role="form" id="user_login">
 						<div class="form-group">
 							<label for="userName" class="col-sm-4 col-md-3 control-label">用户名</label>
 							<div class="col-sm-8 col-md-9">
-								<input type="text" name="userName" class="form-control" id="userName" placeholder="请输入用户名">
+								<input type="text" name="username" class="form-control" id="userName" placeholder="请输入用户名">
 							</div>
 						</div>
 						<div class="form-group">
@@ -70,9 +73,9 @@
 							</div>
 						</div>
 						<div class="form-group" align="center">
-							<button type="submit" class="btn btn-sm btn-success">登录</button>
+							<button type="button" class="btn btn-sm btn-success" id="dl">登录</button>
 							<button type="reset" class="btn btn-sm btn-default">重置</button>
-							<a href="register.html" class="btn btn-sm btn-danger">还没有帐号，去注册</a>
+							<a href="/register" class="btn btn-sm btn-danger">还没有帐号，去注册</a>
 						</div>
 					</form>
 				</div>
@@ -152,7 +155,32 @@
 		<div class="container-fluid text-center panel-footer">
 				<p>Copyright1999-2016 北京中公教育科技股份有限公司 .All Rights Reserved 京ICP证161188号</p>
 		</div>
-		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../bootstrap/js/jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript" src="../../bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../js/jquery.form.js"></script>
+
+		<script type="text/javascript">
+            $(function(){
+                $("#dl").click(function(){
+                    $.ajax({
+                        type:"POST",
+                        url:"/user/login.do",
+                        data: $("#user_login").serialize(),
+                        success:function (result) {
+                            if (result.status == 0){
+                                alert(result.msg)
+                                window.location.href='/index';
+                            }else {
+                                alert(result.msg);
+                            }
+                        },
+                        error:function (result) {
+                            console.log(result);
+                        }
+
+                    });
+                })
+            })
+		</script>
 	</body>
 </html>

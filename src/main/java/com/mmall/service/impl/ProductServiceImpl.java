@@ -196,7 +196,7 @@ public class ProductServiceImpl implements IProductService {
 
     public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy){
         if (StringUtils.isBlank(keyword) && categoryId == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+            return getProductList(pageNum,pageSize);
         }
         List<Integer> categoryIdList = new ArrayList<Integer>();
         if (categoryId != null){

@@ -1,5 +1,9 @@
+<%@ page import="com.mmall.common.Const" %>
+<%@ page import="com.mmall.pojo.User" %>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,22 +28,31 @@
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">
 		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
+		            <li><a href="/index">首页</a></li>
+		            <li><a href="/list">所有商品</a></li>
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
-		        	<li><a href="register.html">注册</a></li>
-		        	<li><a href="sign_in.html">登录</a></li>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="/search">搜索</a></li>
+					<%
+						if (user == null)
+						{%>	<li><a href="/register">注册</a></li>
+					<li><a href="/login">登录</a></li>
+					<%}
+					else
+					{%>	<li><a href="/user_index"><%=user.getUsername()%></a></li>
+					<li><a href="/logout">注销</a>
+							<%}
+					%>
+         		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
 		        </ul>
 		    </div>
+			</div>
 		</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">所有商品</a>
@@ -49,16 +62,16 @@
 			<table class="table table-bordered">
 				<tr>
 					<th width="60px" class="text-center">品牌</th>
-					<td><a href="#">无印</a> &nbsp;<a href="#">博览</a> &nbsp;<a href="#">花印</a></td>
-				</tr>
-				<tr>
-					<th class="text-center">类别</th>
-					<td><a href="#">陶瓷</a> &nbsp;<a href="#">塑料</a> &nbsp;<a href="#">不锈钢</a> &nbsp;<a href="#">木质</a> &nbsp;<a href="#">原料水泥</a></td>
+					<td>
+						<c:forEach items="${categoryList}" var="catrgory">
+							<a href="/list?categoryId=${catrgory.id}">${catrgory.name}</a>
+						</c:forEach>
+					</td>
 				</tr>
 			</table>
 			<div class="">
 				<b>排序：</b>
-				<button class="btn btn-default"><span class="glyphicon glyphicon-signal"></span> 销量</button>
+				<button class="btn btn-default" href=""><span class="glyphicon glyphicon-signal"></span> 销量</button>
 				<button class="btn btn-default"><span class="glyphicon glyphicon-yen"></span> 价格</button>
 				<button class="btn btn-default"><span class="glyphicon glyphicon-time"></span> 上架时间</button>
 				<span class="pull-right">共24个商品</span>

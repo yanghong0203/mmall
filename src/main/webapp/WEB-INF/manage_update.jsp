@@ -83,7 +83,7 @@
 									<select class="form-control" name="categoryId">
 										<c:forEach items="${categoryList}" var="category">
 											<c:choose>
-												<c:when test="${category.status == true} && ${category.id == productVo.categoryId}">
+												<c:when test="${category.status == true and category.id == productVo.categoryId}">
 													<option value="${category.id}" selected="selected"> ${category.name} </option>
 												</c:when>
 												<c:otherwise>

@@ -37,7 +37,6 @@
                     url:"/manage/user/login.do",
                     data: $("#login").serialize(),
 					success:function (result) {
-						console.log(result);
 						if (result.status == 0){
                             window.location.href='/manage/view/index';
 						}else {

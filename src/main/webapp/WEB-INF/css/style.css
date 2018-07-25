@@ -31,16 +31,18 @@ a{
 .zthd-right-ton{
 	margin-bottom: 22px;
 }
-
+#indexCarousel{
+	margin-top: 75px;
+}
 .qzlp p{
 	padding-bottom:20px ;
 }
 .qzlp a{
 	background-color: #EEEEEE;
 }
-@media screen and (min-width:768px) and (max-width:992px) {  
-  .qzlp-padding{padding-bottom:20px ;}  
-} 
+@media screen and (min-width:768px) and (max-width:992px) {
+	.qzlp-padding{padding-bottom:20px ;}
+}
 .index-bottom{
 	background-color: #F5F5F5;
 	padding-top: 30px;
@@ -67,7 +69,7 @@ a{
 	font-size: 12px;
 }
 .table tbody tr td{
-    vertical-align: middle;
+	vertical-align: middle;
 }
 .details-btn{
 	margin-top: 20px;
@@ -81,15 +83,22 @@ a{
 	height: 200px;
 	width: 100%;
 }
-
-
-
+.promotion *{
+	margin: 0px;
+	padding: 0px;
+}
+.hot-product-list{
+	margin-top:10px ;
+}
+.hot-product-list h5{
+	font-weight: bold;
+}
 
 #manageLogin-bki{
 	background-image:url(../img/bg-1.jpg)
 }
 .manageLogin-mian{
-	margin-top: 330px;
+	margin-top: 350px;
 	padding: 10px 20px 20px 20px;
 	width: 350px;
 	background: rgba(213,215,222,0.9);
@@ -119,12 +128,12 @@ a{
 }
 .manage-head span{
 	color: #fed189 !important;
-	font-size: 26px !important; 
+	font-size: 26px !important;
 }
 .manage-body-left{
 	width: 250px;
-    height: 100%;
-    position: fixed;
+	height: 100%;
+	position: fixed;
 	padding-left: 0px;
 	padding-right: 0px;
 	color: #d0d8df;

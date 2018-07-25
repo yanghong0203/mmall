@@ -1,5 +1,9 @@
+<%@ page import="com.mmall.common.Const" %>
+<%@ page import="com.mmall.pojo.User" %>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,27 +23,36 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		        </button>
-		        <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo"></a>
+		        <a class="navbar-brand" href="/index"><img src="img/logo.png" class="logo"></a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">
 		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
+		            <li><a href="/index">首页</a></li>
+		            <li><a href="/list">所有商品</a></li>
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
-		        	<li><a href="register.html">注册</a></li>
-		        	<li><a href="sign_in.html">登录</a></li>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="/search">搜索</a></li>
+					<%
+						if (user == null)
+						{%>	<li><a href="/register">注册</a></li>
+					<li><a href="/login">登录</a></li>
+					<%}
+					else
+					{%>	<li><a href="/user_index"><%=user.getUsername()%></a></li>
+					<li><a href="/logout">注销</a>
+							<%}
+					%>
+		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
 		        </ul>
 		    </div>
+			</div>
 		</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">注册</a>
@@ -49,77 +62,68 @@
 						<div class="page-header">
 							<h3 class="text-left">用户注册</h3>
 						</div>
-	  					<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<label for="userName" class="col-sm-4 col-md-3 control-label">用户名</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="text" name="userName" class="form-control" id="userName" placeholder="请输入用户名">
+					<form class="form-horizontal" role="form" id="register">
+						<div class="form-group">
+							<label class="col-sm-4 col-md-3 control-label">用户名</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="text" name="username" class="form-control" placeholder="请输入用户名">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-sm-4 col-md-3 control-label">密码</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="confirm_password" class="col-sm-4 col-md-3 control-label">确认密码</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="password" class="form-control" id="confirm_password" placeholder="请输入确认密码">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-md-3 control-label">E-mail</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="email" name="email" class="form-control" placeholder="请输入邮箱">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-md-3 control-label">手机号</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="text" name="phone" class="form-control" placeholder="手机号">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-md-3 control-label">密保问题</label>
+							<div class="col-sm-8 col-md-9">
+								<select class="form-control" name="question">
+									<option value="我母亲的姓名">我母亲的姓名</option>
+									<option value="我的小学班主任">我的小学班主任</option>
+									<option value="配偶生日">配偶生日</option>
+									<option value="大学第一次挂的科">大学第一次挂的科</option>
+									<option value="中学名字">中学名字</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-md-3 control-label">答案</label>
+							<div class="col-sm-8 col-md-9">
+								<input type="text" name="answer" class="form-control" placeholder="答案">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-4 col-sm-8 col-md-offset-3 col-sm-9">
+								<div class="checkbox">
+									<label><input type="checkbox">阅读并接受<a href="#" class="a-bule">《用户协议》</a></label>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="password" class="col-sm-4 col-md-3 control-label">密码</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="confirm_password" class="col-sm-4 col-md-3 control-label">确认密码</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="请输入确认密码">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-4 col-md-3 control-label">E-mail</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="email" name="email" class="form-control" id="email" placeholder="请输入邮箱">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phone" class="col-sm-4 col-md-3 control-label">手机号</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="text" name="phone" class="form-control" id="phone" placeholder="手机号">
-								</div>
-							</div>
-							<!--<div class="form-group">
-								<label for="region" class="col-sm-4 col-md-3 control-label">地区</label>
-								<div class="col-sm-8 col-md-9">
-									<select class="form-control" name="region" id="region">
-										<option class="active">请选择省市</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</select>
-								</div>
-							</div>-->
-							<div class="form-group">
-								<label for="firstname" class="col-sm-4 col-md-3 control-label">性别</label>
-								<div class="col-sm-8 col-md-9">
-									<label class="radio radio-inline"><input type="radio" name="gender" id="" value="男">男</label>
-									<label class="radio radio-inline"><input type="radio" name="gender" id="" value="女">女</label>
-								</div>
-							</div>
-							<!--<div class="form-group">
-								<label for="firstname" class="col-sm-4 col-md-3 control-label">爱好</label>
-								<div class="col-sm-8 col-md-9">
-									<label class="checkbox checkbox-inline"><input type="checkbox" name="music" id="music" value="音乐">音乐</label>
-									<label class="checkbox checkbox-inline"><input type="checkbox" name="tourism" id="tourism" value="旅游">旅游</label>
-									<label class="checkbox checkbox-inline"><input type="checkbox" name="tountaineering" id="tountaineering" value="登山">登山</label>
-								</div>
-							</div>-->
-							<div class="form-group">
-								<div class="col-sm-offset-4 col-sm-8 col-md-offset-3 col-sm-9">
-									<div class="checkbox">
-										<label><input type="checkbox">阅读并接受<a href="#" class="a-bule">《用户协议》</a></label>
-									</div>
-								</div>
-							</div>
-							<div class="form-group" align="center">
-								<button type="button" class="btn btn-sm btn-success">注册</button>
-								<button type="reset" class="btn btn-sm btn-default">重置</button>
-								<a href="sign_in.jsp" class="btn btn-sm btn-danger">已有有帐号，去登录</a>
-							</div>
-						</form>
+						</div>
+						<div class="form-group" align="center">
+							<button type="button" class="btn btn-sm btn-success" id="zc">注册</button>
+							<button type="reset" class="btn btn-sm btn-default">重置</button>
+							<a href="/login" class="btn btn-sm btn-danger">已有有帐号，去登录</a>
+						</div>
+					</form>
 					
 				</div>
 				
@@ -202,5 +206,28 @@
 		</div>
 		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript">
+            $(function(){
+                $("#zc").click(function(){
+                    $.ajax({
+                        type:"POST",
+                        url:"/user/register.do",
+                        data: $("#register").serialize(),
+                        success:function (result) {
+                            if (result.status == 0){
+                                alert(result.msg);
+                                window.location.href='/login';
+                            }else {
+                                alert(result.msg);
+                            }
+                        },
+                        error:function (result) {
+                            console.log(result);
+                        }
+                    });
+                })
+            })
+
+		</script>
 	</body>
 </html>
