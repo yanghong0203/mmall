@@ -23,7 +23,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/index"><img src="img/logo.png" class="logo"></a>
+					<a class="navbar-brand" href="/index"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -74,12 +74,12 @@
 							<c:when test="${lunboimg == 1}">
 								<c:set var="lunboimg" value="0" />
 								<div class="item active">
-									<a href="#" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
+									<a href="/product_detail?productId=${product.id}" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="item">
-									<a href="#" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
+									<a href="/product_detail?productId=${product.id}" target="_blank"><img alt="" src="${product.imageHost}${product.mainImage}" /></a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -98,7 +98,7 @@
 					<c:if test="${product.indexStatus == 2}">
 						<div class="col-xs-6 col-sm-6 col-md-3 new-recommend-div">
 							<div class="thumbnail">
-								<a href="commodity_details.html" target="_blank">
+								<a href="/product_detail?productId=${product.id}" target="_blank">
 									<img class="img-responsive" src="${product.imageHost}${product.subImage[0]}"/>
 									<h5>${product.name}</h5>
 									<p class="commodity-price">${product.price}</p>
@@ -115,12 +115,12 @@
 				<div class="col-xs-6 col-sm-6 col-md-3">
 					<c:forEach items="${productList}" var="product">
 						<c:if test="${product.name == 'OPPO R15星云特别版'}">
-							<a href="#"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
+							<a href="/product_detail?productId=${product.id}"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 						</c:if>
 					</c:forEach>
 					<c:forEach items="${productList}" var="product">
 						<c:if test="${product.name == 'Meizu/魅族 魅蓝 E3'}">
-							<a href="#"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
+							<a href="/product_detail?productId=${product.id}"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 						</c:if>
 					</c:forEach>
 				</div>
@@ -129,7 +129,7 @@
 						<c:if test="${product.indexStatus == 3}">
 							<c:if test="${product.name ne 'Meizu/魅族 魅蓝 E3' and product.name ne 'OPPO R15星云特别版'}">
 								<div class="col-md-4 col-xs-6 col-sm-6">
-									<a href="#"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
+									<a href="/product_detail?productId=${product.id}"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 								</div>
 							</c:if>
 						</c:if>
@@ -143,14 +143,14 @@
 				<c:forEach items="${productList}" var="product">
 					<c:if test="${product.indexStatus == 4 and product.name == '360 N6Pro'}">
 						<div class="col-sm-12 col-md-3">
-							<a href="#" ><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
+							<a href="/product_detail?productId=${product.id}" ><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 						</div>
 					</c:if>
 				</c:forEach>
 				<c:forEach items="${productList}" var="product">
 					<c:if test="${product.indexStatus == 4 and product.name == 'Meizu/魅族 PRO 7'}">
 						<div class="col-sm-12 col-md-9">
-							<a href="#" ><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
+							<a href="/product_detail?productId=${product.id}" ><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -160,7 +160,7 @@
 					<c:if test="${product.indexStatus == 3}">
 						<c:if test="${product.name ne 'Meizu/魅族 魅蓝 E3' and product.name ne 'OPPO R15星云特别版'}">
 							<div class="col-xs-6 col-sm-3 col-md-2 thumbnail">
-								<a href="#" ><img src="${product.imageHost}${product.mainImage}" /></a>
+								<a href="/product_detail?productId=${product.id}" ><img src="${product.imageHost}${product.mainImage}" /></a>
 								<h5>${product.name}</h5>
 								<p class="commodity-price">${product.price}</p>
 							</div>

@@ -23,7 +23,7 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		        </button>
-		        <a class="navbar-brand" href="/index"><img src="img/logo.png" class="logo"></a>
+		        <a class="navbar-brand" href="/index"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">

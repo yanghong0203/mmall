@@ -20,4 +20,5 @@ public interface CategoryMapper {
     List<Category> selectCategoryChildenByParentId(Integer parentId);
 
     List<Category> selectCategory();
+
 }

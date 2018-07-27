@@ -71,17 +71,69 @@ a{
 .table tbody tr td{
 	vertical-align: middle;
 }
-.details-btn{
+
+/*产品详情*/
+.subImages{
 	margin-top: 20px;
 }
-.commodity-details p{
-	text-indent:2em;
-	font-size: 15px;
-	margin-top: 10px;
+.info-item{
+	margin-top: 20px;
+	padding: 0 10px;
 }
-#commodity_details_slide img{
-	height: 200px;
-	width: 100%;
+.p-lab{
+	display: inline-block;
+	width: 50px;
+	color: #999;
+}
+.p-subtitle{
+	color: #c60023;
+	line-height: 30px;
+	font-size: 15px;
+}
+.p-price-div{
+	padding: 10px;
+	background-color: #EEEEEE;
+	margin-top: 20px;
+}
+.p-price{
+	font-size: 18px;
+	color: #c60023;
+}
+.p-stock{
+
+}
+.p-num{
+	width: 110px;
+	display: inline-block;
+}
+.p-btn{
+	font-size: 18px;
+}
+.p-btn button{
+	margin-right:30px ;
+}
+.p-detail{
+	margin: 0px;
+	padding: 0px;
+}
+.p-detail image{
+	display: block;
+}
+
+
+.carousel-control.left {
+
+	background-image:none;
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+.carousel-control.right {
+	left: auto;
+	right: 0;
+
+	background-image:none;
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
 }
 .promotion *{
 	margin: 0px;

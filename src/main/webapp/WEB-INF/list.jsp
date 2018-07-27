@@ -23,11 +23,10 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		        </button>
-		        <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo"></a>
+		        <a class="navbar-brand" href="/index"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">
-		            
 		            <li><a href="/index">首页</a></li>
 		            <li><a href="/list">所有商品</a></li>
 		        </ul>
@@ -61,239 +60,32 @@
 			</div>
 			<table class="table table-bordered">
 				<tr>
-					<th width="60px" class="text-center">品牌</th>
+					<th width="60px" class="text-center">分类</th>
 					<td>
 						<c:forEach items="${categoryList}" var="catrgory">
-							<a href="/list?categoryId=${catrgory.id}">${catrgory.name}</a>
+							<a href="/list?categoryId=${catrgory.id}">${catrgory.name}</a> &nbsp;&nbsp;
 						</c:forEach>
 					</td>
 				</tr>
 			</table>
 			<div class="">
 				<b>排序：</b>
-				<button class="btn btn-default" href=""><span class="glyphicon glyphicon-signal"></span> 销量</button>
-				<button class="btn btn-default"><span class="glyphicon glyphicon-yen"></span> 价格</button>
-				<button class="btn btn-default"><span class="glyphicon glyphicon-time"></span> 上架时间</button>
-				<span class="pull-right">共24个商品</span>
+					<button class="btn btn-default" id="OrderByPrice"><span class="glyphicon glyphicon-yen"></span>价格</button>
+					<button class="btn btn-default" id="OrderByCreateTime"><span class="glyphicon glyphicon-time"></span> 上架时间</button>
+				<span class="pull-right">共${productPageInfo.size}个商品</span>
 			</div>
 			<div class="row commodity-list">
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
+				<c:forEach items="${productPageInfo.list}" var="product">
+					<div class="col-md-2 col-sm-3 col-xs-4">
+						<div class="thumbnail">
+							<a href="/product_detail?productId=${product.id}" target="_blank">
+								<img src="${product.imageHost}${product.subImage[0]}"/>
+								<h5>${product.name}</h5>
+								<p class="commodity-price">￥${product.price}</p>
+							</a>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				
+				</c:forEach>
 			</div>
 			<nav aria-label="Page navigation" class="pull-right">
 			  <ul class="pagination">

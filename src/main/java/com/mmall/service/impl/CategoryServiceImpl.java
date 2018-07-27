@@ -59,7 +59,22 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return ServerResponse.createBySuccess(categoryList);
     }
-    public ServerResponse<List<Category>> getCategory(){
+
+    public ServerResponse<List<Category>> getCategory(Integer categoryId) {
+        List<Category> categoryList = Lists.newArrayList();
+        if (categoryId == null){
+            categoryList = categoryMapper.selectCategory();
+            if (CollectionUtils.isEmpty(categoryList)){
+                logger.info("分类为空");
+            }
+            return ServerResponse.createBySuccess(categoryList);
+        }else {
+            Category category = categoryMapper.selectByPrimaryKey(categoryId);
+            categoryList.add(category);
+            return ServerResponse.createBySuccess(categoryList);
+        }
+    }
+    public ServerResponse<List<Category>> getAllCategory(){
         List<Category> categoryList = categoryMapper.selectCategory();
         if (CollectionUtils.isEmpty(categoryList)){
             logger.info("分类为空");

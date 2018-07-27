@@ -73,7 +73,7 @@ public class BackendController {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
         }
-        ServerResponse serverResponse = iCategoryService.getCategory();
+        ServerResponse serverResponse = iCategoryService.getAllCategory();
         modelAndView.addObject("data",serverResponse.getData());
         modelAndView.setViewName("manage_add");
         return modelAndView;
@@ -86,7 +86,7 @@ public class BackendController {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
         }else {
-            ServerResponse serverResponse = iCategoryService.getCategory();
+            ServerResponse serverResponse = iCategoryService.getAllCategory();
             modelAndView.addObject("data",serverResponse.getData());
             modelAndView.setViewName("manage_category");
             return modelAndView;
@@ -101,7 +101,7 @@ public class BackendController {
         }else {
             Map data = Maps.newHashMap();
             ServerResponse serverResponse1 = iProductService.getProductDetail(productId);
-            ServerResponse serverResponse2 = iCategoryService.getCategory();
+            ServerResponse serverResponse2 = iCategoryService.getAllCategory();
             data.put("categoryList",serverResponse2.getData());
             data.put("productVo",serverResponse1.getData());
             modelAndView.addAllObjects(data);

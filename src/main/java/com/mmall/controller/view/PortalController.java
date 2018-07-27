@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -30,6 +31,7 @@ public class PortalController {
         modelAndView.setViewName("index");
         return modelAndView;
     }
+
     @RequestMapping("/list")
     public ModelAndView list(@RequestParam(value = "keyword",required = false) String keyword,
                              @RequestParam(value = "categoryId",required = false) Integer categoryId,
@@ -38,10 +40,11 @@ public class PortalController {
                              @RequestParam(value = "orderBy",defaultValue = "") String orderBy) {
         ModelAndView modelAndView = new ModelAndView();
         ServerResponse serverResponseProduct = iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
-        ServerResponse serverResponseCategory = iCategoryService.getCategory();
+        ServerResponse serverResponseCategory = iCategoryService.getCategory(categoryId);
+
         Map map = Maps.newHashMap();
         map.put("categoryList",serverResponseCategory.getData());
-        map.put("productList",serverResponseProduct.getData());
+        map.put("productPageInfo",serverResponseProduct.getData());
         modelAndView.addAllObjects(map);
         modelAndView.setViewName("list");
         return modelAndView;
@@ -72,5 +75,14 @@ public class PortalController {
     @RequestMapping("/shopping_cart")
     public String shopping_cart(HttpSession session) {
         return "shopping_cart";
+    }
+    @RequestMapping("/product_detail")
+    public ModelAndView productDetail(HttpSession session,Integer productId) {
+        ModelAndView modelAndView = new ModelAndView();
+        ServerResponse serverResponse = iProductService.getProductDetail(productId);
+        modelAndView.addObject("product",serverResponse.getData());
+        modelAndView.setViewName("commodity_details");
+        return modelAndView;
+
     }
 }
