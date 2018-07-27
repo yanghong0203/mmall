@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<title>商品管理</title>
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/style.css" />

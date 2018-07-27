@@ -44,9 +44,10 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					    %>
-					<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+					<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 				</ul>
 		    </div>
+			</div>
 		</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
@@ -94,8 +95,9 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" id="productInfo" role="form">
 						<div>
+							<input type="hidden" name="productId" value="${product.id}">
 							<h3>${product.name}</h3>
 							<p class="p-subtitle">${product.subtitle}</p>
 						</div>
@@ -110,7 +112,7 @@
 								    <span class="input-group-btn">
 								    	<button class="btn btn-default" type="button" id="pBtnReduce">-</button>
 								    </span>
-									<input type="text" class="form-control text-center" id="pNumber" readonly="readonly" value="1">
+									<input type="text" class="form-control text-center" name="count" id="pNumber" readonly="readonly" value="1">
 									<span class="input-group-btn">
 								       <button class="btn btn-default" type="button" id="pBtnAdd">+</button>
 								    </span>
@@ -122,7 +124,7 @@
 							<span class="p-stock">${product.stock}</span>
 						</div>
 						<div  class="info-item p-btn">
-							<button class="btn btn-warning" type="button">加入购物车</button>
+							<button class="btn btn-warning" onclick="addCart()" type="button">加入购物车</button>
 							<button class="btn btn-danger" type="submit">立即购买</button>
 						</div>
 					</form>
@@ -222,7 +224,7 @@
 				});
 				$("#pBtnAdd").click(function () {
 					var num = parseInt($("#pNumber").val());
-					if(num <=999){
+					if(num <=${product.stock}){
 						$("#pNumber").val(num+1);
 					}
 				});
@@ -231,6 +233,24 @@
                     $(".subImageMain").attr("src",imgHost);
                 })
 			})
+			function addCart() {
+                $.ajax({
+                    type:"POST",
+                    url:"/cart/add.do",
+                    data: $("#productInfo").serialize(),
+                    success:function (result) {
+                        if (result.status == 0){
+                            alert("添加成功")
+                        }else {
+                            alert("请登录后添加");
+                            window.location.href="/login";
+                        }
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+                });
+            }
 		</script>
 	</body>
 </html>

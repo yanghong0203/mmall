@@ -22,7 +22,7 @@ public interface ProductMapper {
 
     List<Product> selectIndexList();
 
-    List<Product> selectByNameAndProductId(@Param("productName") String productName,@Param("productId") Integer productId);
+    List<Product> selectByName(@Param("productName") String productName);
 
     List<Product> selectByNameAndCategoryIds(@Param("productName") String productName,@Param("categoryIdList") List<Integer> categoryIdList);
 }

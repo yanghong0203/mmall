@@ -113,5 +113,14 @@ public class CartController {
         return iCartService.getCartProductCount(user.getId());
     }
 
+    /*@RequestMapping("reverse_select.do")
+    @ResponseBody
+    public ServerResponse<CartVo> reverseSelect(HttpSession session){
+        User user =(User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+        }
+        return iCartService.selectOrUnSelect(user.getId(),null,null);
+    }*/
 
 }

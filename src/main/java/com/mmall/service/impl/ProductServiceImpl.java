@@ -148,7 +148,7 @@ public class ProductServiceImpl implements IProductService {
         productListVo.setId(product.getId());
         productListVo.setName(product.getName());
         productListVo.setCategoryId(product.getCategoryId());
-        productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix","http://img.happymmall.com/"));
+        productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix"));
         productListVo.setMainImage(product.getMainImage());
         productListVo.setSubImage(product.getSubImages().split(","));
         productListVo.setPrice(product.getPrice());
@@ -159,21 +159,18 @@ public class ProductServiceImpl implements IProductService {
         return productListVo;
     }
 
-    public ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
+    public ServerResponse searchProduct(String productName){
         if (StringUtils.isNotBlank(productName)){
             productName = new StringBuilder().append("%").append(productName).append("%").toString();
         }
-        List<Product> productList = productMapper.selectByNameAndProductId(productName,productId);
+        List<Product> productList = productMapper.selectByName(productName);
 
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for (Product productItem : productList){
             ProductListVo productListVo = assembleProductListVo(productItem);
             productListVoList.add(productListVo);
         }
-        PageInfo pageResult = new PageInfo(productList);
-        pageResult.setList(productListVoList);
-        return ServerResponse.createBySuccess(pageResult);
+        return ServerResponse.createBySuccess(productListVoList);
     }
 
     public ServerResponse<ProductDetailVo> getProductDetail(Integer productId){

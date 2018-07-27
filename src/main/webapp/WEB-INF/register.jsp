@@ -8,6 +8,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
@@ -43,7 +44,7 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					%>
-		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>

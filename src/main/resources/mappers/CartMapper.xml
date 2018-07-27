@@ -158,7 +158,17 @@
             and product_id = #{productId}
         </if>
     </update>
-    
+    <!--<update id="reverseSelectProduct" parameterType="map">
+        update mmall_cart
+        <if test="">
+          set checked = 0,
+        </if>
+        <if test="">
+          set checked = 1,
+        </if>
+        update_time = now()
+        where user_id = #{userId}
+    </update>-->
     <select id="selectCartProductCount" parameterType="int" resultType="int">
         select IFNULL(sum(quantity),0) as count from mmall_cart where user_id = #{userId}
     </select>

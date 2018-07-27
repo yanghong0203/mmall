@@ -14,6 +14,8 @@ public class CartProductVo {
     private String productName;
     private String productSubtitle;
     private String productMainImage;
+    private String[] subImage;
+    private String imageHost;
     private BigDecimal productPrice;
     private Integer productStatus;
     private BigDecimal productTotalPrice;
@@ -83,6 +85,22 @@ public class CartProductVo {
 
     public void setProductMainImage(String productMainImage) {
         this.productMainImage = productMainImage;
+    }
+
+    public String[] getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(String[] subImage) {
+        this.subImage = subImage;
+    }
+
+    public String getImageHost() {
+        return imageHost;
+    }
+
+    public void setImageHost(String imageHost) {
+        this.imageHost = imageHost;
     }
 
     public BigDecimal getProductPrice() {

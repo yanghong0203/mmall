@@ -6,33 +6,33 @@
 <% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<title>所有商品</title>
-	</head>
-	<body>
-		<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
-		    <div class="container">
-		    <div class="navbar-header">
-		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		        </button>
-		        <a class="navbar-brand" href="#"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
-		        <ul class="nav navbar-nav">
-		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
-		        </ul>
-		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
+	<title>所有商品</title>
+</head>
+<body>
+	<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/index"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="example-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/index">首页</a></li>
+					<li><a href="/list">所有商品</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/search">搜索</a></li>
 					<%
 						if (user == null)
 						{%>	<li><a href="/register">注册</a></li>
@@ -42,272 +42,76 @@
 					{%>	<li><a href="/user_index"><%=user.getUsername()%></a></li>
 					<li><a href="/logout">注销</a>
 							<%}
-					%>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
-		        </ul>
-		    </div>
+						%>
+					<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
+				</ul>
 			</div>
-		</nav>
+		</div>
+	</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">搜索</a>
 					</li>
 				</ul>
 				<div align="center">
-					<div class="input-group col-md-5 col-xs-8 col-lg-3 col-sm-6">
-						<input type="text" class="form-control">
-	  					<span class="input-group-btn">
+					<form action="/search" method="post">
+						<div class="input-group col-md-5 col-xs-8 col-lg-3 col-sm-6">
+							<input type="text" class="form-control" name="keyword">
+							<span class="input-group-btn">
 					    	<button class="btn btn-default" type="button">搜索</button>
 					    </span>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
-			<p class="text-right">共24个商品</p>
-			<div class="row commodity-list">
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
+			<c:choose>
+				<c:when test="${productList != null}">
+					<p class="text-right">共24个商品</p>
+					<div class="row commodity-list">
+						<c:forEach items="${productList}" var="product">
+							<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+								<div class="thumbnail">
+									<a href="/product_detail?productId=${product.id}" target="_blank">
+										<img src="${product.imageHost}${product.subImage[0]}"/>
+										<h5>${product.name}</h5>
+										<p class="commodity-price">￥${product.price}</p>
+									</a>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
+					<nav aria-label="Page navigation" class="pull-right">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</c:when>
+				<c:otherwise>
+					<div class="jumbotron text-center">
+						<h3>抱歉~我们找不到对应的商品，请您继续逛逛吧。</h3>
 					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-3 col-xs-4">
-					<div class="thumbnail">
-						<a href="#" target="_blank">
-							<img src="img/new1.png"/>
-							<h5>便携简约清洁扫帚</h5>
-							<p class="commodity-price">$580.00</p>
-						</a>
-					</div>
-				</div>
-				
-			</div>
-			<nav aria-label="Page navigation" class="pull-right">
-			  <ul class="pagination">
-			    <li>
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		
 		<div class="container-fluid index-bottom panel-footer">
 			<div class="container">
 				<div class="col-md-3 col-sm-12 text-center">

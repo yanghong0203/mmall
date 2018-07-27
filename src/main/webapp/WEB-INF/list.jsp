@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<title>所有商品</title>
 	</head>
 	<body>
@@ -42,7 +43,7 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					%>
-         		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+         		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>
@@ -76,7 +77,7 @@
 			</div>
 			<div class="row commodity-list">
 				<c:forEach items="${productPageInfo.list}" var="product">
-					<div class="col-md-2 col-sm-3 col-xs-4">
+					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
 							<a href="/product_detail?productId=${product.id}" target="_blank">
 								<img src="${product.imageHost}${product.subImage[0]}"/>
@@ -180,21 +181,8 @@
 			</div>
 		</div>
 		<div class="container-fluid text-center panel-footer">
-				<p>Copyright1999-2016 北京中公教育科技股份有限公司 .All Rights Reserved 京ICP证161188号</p>
+			<p>Copyright1999-2016 北京中公教育科技股份有限公司 .All Rights Reserved 京ICP证161188号</p>
 		</div>
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
 		

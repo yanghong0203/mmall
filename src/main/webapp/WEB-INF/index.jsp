@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
+        <link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<title>羚羊数码</title>
 	</head>
 	<body>
@@ -43,7 +44,7 @@
                                 <li><a href="/logout">注销</a>
                             <%}
 					    %>
-						<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+						<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 					</ul>
 				</div>
 			</div>

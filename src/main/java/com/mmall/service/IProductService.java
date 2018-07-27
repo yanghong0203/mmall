@@ -15,7 +15,7 @@ public interface IProductService {
 
     ServerResponse getProductList (int pageNum,int pageSize);
 
-    ServerResponse<PageInfo> searchProduct(String productName, Integer productId, int pageNum, int pageSize);
+    ServerResponse<PageInfo> searchProduct(String productName);
 
     ServerResponse<ProductDetailVo> getProductDetail(Integer productId);
 

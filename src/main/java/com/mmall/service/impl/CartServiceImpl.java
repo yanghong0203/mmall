@@ -38,7 +38,7 @@ public class CartServiceImpl implements ICartService {
             // 这个产品不在这个购物车里，需要新增一个这个产品的记录
             Cart cartItem = new Cart();
             cartItem.setQuantity(count);
-            cartItem.setChecked(Const.Cart.CHECKED);
+            cartItem.setChecked(Const.Cart.UN_CHECKED);
             cartItem.setProductId(productId);
             cartItem.setUserId(userId);
             cartMapper.insert(cartItem);
@@ -108,6 +108,8 @@ public class CartServiceImpl implements ICartService {
                 Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
                 if (product != null){
                     cartProductVo.setProductMainImage(product.getMainImage());
+                    cartProductVo.setSubImage(product.getSubImages().split(","));
+                    cartProductVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix"));
                     cartProductVo.setProductName(product.getName());
                     cartProductVo.setProductSubtitle(product.getSubtitle());
                     cartProductVo.setProductStatus(product.getStatus());

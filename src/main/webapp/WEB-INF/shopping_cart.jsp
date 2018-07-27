@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<title>购物车</title>
 	</head>
 	<body>
@@ -27,11 +28,11 @@
 		    </div>
 		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
 		        <ul class="nav navbar-nav">
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
+		            <li><a href="/index">首页</a></li>
+		            <li><a href="/list">所有商品</a></li>
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
+		        	<li><a href="/search">搜索</a></li>
 					<%
 						if (user == null)
 						{%>	<li><a href="/register">注册</a></li>
@@ -42,7 +43,7 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					%>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="/hopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>
@@ -51,7 +52,7 @@
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">购物车</a>
@@ -61,70 +62,124 @@
 			<div>
 				<table class="table cart-table hidden-xs hidden-sm">
 					<tr>
-						<td width="10%"><input type="checkbox" id="cart_select_all" > 全选</td>
+						<td width="10%"><input type="checkbox" class="select-cart-prduct selectAll" onclick="selectAll()" id="bigSelectAll"><label for="bigSelectAll">&nbsp;全选</label> </td>
 						<td width="42%">商品名称</td>
 						<td width="12%" align="center">单价</td>
 						<td width="12%" align="center">数量</td>
 						<td width="12%" align="center">小计</td>
 						<td width="12%" align="center">操作</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox" name="" id="" value="" /></td>
-						<td><img width="70px" src="img/new2.png"/><span>便携简约清洁扫帚</span></td>
-						<td align="center"><span>$580.00</span></td>
-						<td>
-							<div class="input-group">
+					<c:forEach items="${cartData.cartProductVoList}" var="cartProduct">
+						<c:if test="${cartProduct.productStatus == 1}">
+							<tr class="tr${cartProduct.productId}">
+								<c:if test="${cartProduct.productChecked == 1}">
+									<td><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})" checked/></td>
+								</c:if>
+								<c:if test="${cartProduct.productChecked == 0}">
+									<td><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})"/></td>
+								</c:if>
+								<td><a href="/product_detail?productId=${cartProduct.productId}"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></a><span>${cartProduct.productName}</span></td>
+								<td align="center"><span>￥${cartProduct.productPrice}</span></td>
+								<td>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button" onclick="reduceProductNum('${cartProduct.productId}',${cartProduct.productPrice})">-</button>
+										</span>
+										<input type="text" class="form-control text-center pNumber${cartProduct.productId}" readonly="readonly" value="${cartProduct.quantity}">
+										<span class="input-group-btn">
+										   <button class="btn btn-default" type="button" onclick="addProductNum('${cartProduct.productId}',${cartProduct.productStock},${cartProduct.productPrice})">+</button>
+										</span>
+									</div>
+								</td>
+								<td align="center"><span class="product-price${cartProduct.productId}">${cartProduct.productTotalPrice}</span></td>
+								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
+							</tr>
+						</c:if>
+						<c:if test="${cartProduct.productStatus == 2}">
+							<tr class="tr${cartProduct.productId} cart-product-xj">
+								<td><input type="checkbox" class="select-cart-prduct" disabled="disabled"/></td>
+								<td><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/><span>${cartProduct.productName}</span></td>
+								<td align="center"><span>${cartProduct.productPrice}</span></td>
+								<td>
+									<div class="input-group">
 							    <span class="input-group-btn">
-							    	<button class="btn btn-default" type="button">-</button>
+								    <button class="btn btn-default" type="button" disabled="disabled">-</button>
+								</span>
+										<input type="text" class="form-control text-center" readonly="readonly" value="1">
+										<span class="input-group-btn">
+							       <button class="btn btn-default" type="button" disabled="disabled">+</button>
 							    </span>
-							    <input type="text" class="form-control text-center" value="1">
-							    <span class="input-group-btn">
-							       <button class="btn btn-default" type="button">+</button>
-							    </span>
-						   	</div>
-						</td>
-						<td align="center">$580.00</td>
-						<td align="center"><a href="#">删除</a></td>
-					</tr>
+									</div>
+								</td>
+								<td align="center">￥${cartProduct.productTotalPrice}</td>
+								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
+							</tr>
+						</c:if>
+					</c:forEach>
 					<tr>
-						<td><input type="checkbox" id="cart_select_all" > 全选</td>
-						<td colspan="2"><a href="#"><span>删除</span></a> <a href=""><span>清除下架商品</span></a></td>
-						<td colspan="2"><p>已选商品1件合计（不含运费）：</p><span class="commodity-price lead">$580.00 </span><span>已优惠：$0</span></td>
+						<td><input type="checkbox" id="bigUnSelectAll" ><label for="bigUnSelectAll">&nbsp;反选</label></td>
+						<td colspan="2"><a href="javascript:cartDeleteAll();"><span>清除下架商品</span></a></td>
+						<td colspan="2"><p>已选商品<span>0</span>件合计（不含运费）：</p><span class="commodity-price lead cartTotalPrice">￥${cartData.cartTotalPrice}</span><span>已优惠：￥0</span></td>
 						<td align="center"><button type="submit" class="btn btn-sm btn-danger">确认结算</button></td>
 					</tr>
 				</table>
 				<table class="table cart-table cart-table-sm hidden-md hidden-lg">
 					<tr>
-						<td colspan="4"><label for="select_all"><input type="checkbox" name="select_all" id="select_all" value=""> 全选</label></td>
+						<td colspan="4"><label for="smSelectAll"><input type="checkbox" onclick="selectAll()" class="select-cart-prduct selectAll" id="smSelectAll">&nbsp;全选</label></td>
 					</tr>
+					<c:forEach items="${cartData.cartProductVoList}" var="cartProduct">
+						<c:if test="${cartProduct.productStatus == 1}">
+							<tr class="tr${cartProduct.productId}">
+								<c:if test="${cartProduct.productChecked == 1}">
+									<td width="10%"><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})" checked/></td>
+								</c:if>
+								<c:if test="${cartProduct.productChecked == 0}">
+									<td width="10%"><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})"/></td>
+								</c:if>
+								<td width="30%"><a href="/product_detail?productId=${cartProduct.productId}"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></a><span>${cartProduct.productName}</span></td>
+								<td >
+									<h5>${cartProduct.productName}</h5>
+									<div class="input-group input-group-sm col-xs-12 col-sm-5">
+										 <span class="input-group-btn">
+											<button class="btn btn-default" type="button" onclick="reduceProductNum('${cartProduct.productId}',${cartProduct.productPrice})">-</button>
+										</span>
+										<input type="text" class="form-control text-center pNumber${cartProduct.productId}" readonly="readonly" value="${cartProduct.quantity}">
+										<span class="input-group-btn">
+										   <button class="btn btn-default" type="button" onclick="addProductNum('${cartProduct.productId}',${cartProduct.productStock},${cartProduct.productPrice})">+</button>
+										</span>
+									</div>
+									<p class="commodity-price${cartProduct.productId}">￥${cartProduct.productTotalPrice}</p>
+								</td>
+								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
+							</tr>
+						</c:if>
+						<c:if test="${cartProduct.productStatus == 2}">
+							<tr class="tr${cartProduct.productId} cart-product-xj">
+								<td width="10%"><input type="checkbox" disabled="disabled"/></td>
+								<td width="30%"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/><span>${cartProduct.productName}</span></td>
+								<td >
+									<h5>${cartProduct.productName}</h5>
+									<div class="input-group input-group-sm col-xs-12 col-sm-5">
+										 <span class="input-group-btn">
+											<button class="btn btn-default" type="button" disabled="disabled">-</button>
+										</span>
+										<input type="text" class="form-control text-center" readonly="readonly" value="${cartProduct.quantity}">
+										<span class="input-group-btn">
+										   <button class="btn btn-default" type="button" disabled="disabled">+</button>
+										</span>
+									</div>
+									<p>￥${cartProduct.productTotalPrice}</p>
+								</td>
+								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
+							</tr>
+						</c:if>
+					</c:forEach>
 					<tr>
-						<td width="10%"><input type="checkbox" name="commodity_name" id="commodity_name" value=""></td>
-						<td width="30%"><img class="img-responsive" src="img/new1.png"/></td>
-						<td >
-							<h5>便携简约清洁扫帚</h5>
-							<div class="input-group input-group-sm col-xs-12 col-sm-5">
-							    <span class="input-group-btn">
-							    	<button class="btn btn-default" type="button">-</button>
-							    </span>
-							    <input type="text" class="form-control text-center" value="1">
-							    <span class="input-group-btn">
-							       <button class="btn btn-default" type="button">+</button>
-							    </span>
-						   	</div>
-						   	<p class="commodity-price">$480.00</p>
-						</td>
-						<td align="center"><a class="commodity-price" href="">删除</a></td>
-					</tr>
-					<tr>
-						<td><a href="">删除</a></td>
-						<td><a href="">清除下架商品</a></td>
-						<td align="right"><p>已选商品1件合计（不含运费）：</p><span class="commodity-price lead">$580.00 </span><span>已优惠：$0</span></td>
+						<td></td>
+						<td><a href="javascript:cartDeleteAll();">清除下架商品</a></td>
+						<td align="right"><p>已选商品1件合计（包邮）：</p><span class="commodity-price lead cartTotalPrice">￥${cartData.cartTotalPrice} </span><span>已优惠：$0</span></td>
 						<td align="right"><button type="submit" class="btn btn-xs btn-danger">确认结算</button></td>
-						
 					</tr>
-					
-				
-				
 				</table>
 			</div>
 		</div>
@@ -204,5 +259,177 @@
 		</div>
 		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript">
+			function reduceProductNum(id,price){
+                var num = parseInt($(".pNumber"+id).val());
+                if(num > 1){
+                    num = num-1;
+                    $.ajax({
+                        type: "POST",
+                        url: "/cart/update.do",
+						data:"productId="+id+"&count="+num,
+                        success: function (result) {
+                            if (result.status == 0) {
+                                $(".pNumber"+id).val(num);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".product-price"+id).html("￥"+(price*num).toFixed(2));
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                        }
+                    });
+                }
+			}
+			function addProductNum(id,stock,price){
+                var num = parseInt($(".pNumber"+id).val());
+                if(num < stock){
+                    num = num+1;
+                    $.ajax({
+                        type: "POST",
+                        url: "/cart/update.do",
+                        data:"productId="+id+"&count="+num,
+                        success: function (result) {
+                            if (result.status == 0) {
+                                $(".pNumber"+id).val(num);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".product-price"+id).html("￥"+(price*num).toFixed(2));
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                        }
+                    });
+                }
+			}
+			isAllcheck = false;
+            function selectAll() {
+                isAllcheck = !isAllcheck;
+                if (isAllcheck) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/cart/select_all.do",
+                        success: function (result) {
+                            if (result.status == 0) {
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $('.select-cart-prduct').prop("checked", true);
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                        }
+                    });
+                }else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/cart/un_select_all.do",
+                        success: function (result) {
+                            if (result.status == 0) {
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $('.select-cart-prduct').prop("checked", false);
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                        }
+                    });
+				}
+            }
+			// 反选
+			/*$("#reverseSelect").click(function(){
+				$("#checkBoxList :checkbox").each(function(){
+					$(this).attr("checked", !$(this).attr("checked"));
+				});
+			});*/
+            function cartDelete(id){
+                $.ajax({
+                    type:"POST",
+                    url:"/cart/delete_product.do",
+                    data:"productIds="+id,
+                    success:function (result) {
+                        if (result.status == 0){
+                            $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                            $(".tr"+id).remove();
+                        }
+                        if(result.status == 10){
+                            alert("用户信息已过期，请重新登录");
+                            window.location.href="/login"
+						}
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+                });
+				return false;
+            }
+            function cartDeleteAll() {
+				$(".cart-product-xj").remove();
+            }
+            function productCheck(id){
+                if($(".checkbox"+id).prop('checked')){
+                    $.ajax({
+                        type:"POST",
+                        url:"/cart/select.do",
+                        data:"productId="+id,
+                        success:function (result) {
+                            if (result.status == 0){
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                if (result.data.allChecked == true) {
+                                    $(".selectAll").prop('checked',true);
+								}else {
+                                    $(".selectAll").prop('checked',false);
+								}
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error:function (result) {
+                            console.log(result);
+                        }
+                    });
+                }else{
+                    $.ajax({
+                        type:"POST",
+                        url:"/cart/un_select.do",
+                        data:"productId="+id,
+                        success:function (result) {
+                            if (result.status == 0){
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                if (result.data.allChecked == true) {
+                                    $(".selectAll").prop('checked',true);
+                                }else {
+                                    $(".selectAll").prop('checked',false);
+                                }
+                            }
+                            if(result.status == 10){
+                                alert("用户信息已过期，请重新登录");
+                                window.location.href="/login"
+                            }
+                        },
+                        error:function (result) {
+                            console.log(result);
+                        }
+                    });
+                }
+            }
+		</script>
 	</body>
 </html>

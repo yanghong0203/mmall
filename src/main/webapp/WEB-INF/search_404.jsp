@@ -15,44 +15,43 @@
 		<title>所有商品</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
-		    <div class="container">
-		    <div class="navbar-header">
-		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		        </button>
-		        <a class="navbar-brand" href="#"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
-		        <ul class="nav navbar-nav">
-		            
-		            <li><a href="index.html">首页</a></li>
-		            <li><a href="list.html">所有商品</a></li>
-		        </ul>
-		        <ul class="nav navbar-nav navbar-right">
-		        	<li><a href="search.html">搜索</a></li>
+	<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/index"><img src="http://img.youngh.cn/logo.png" class="logo"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="example-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/index">首页</a></li>
+					<li><a href="/list">所有商品</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/search">搜索</a></li>
 					<%
 						if (user == null)
-						{%>
-					<li><a href="/register">注册</a></li>
+						{%>	<li><a href="/register">注册</a></li>
 					<li><a href="/login">登录</a></li>
 					<%}
 					else
 					{%>	<li><a href="/user_index"><%=user.getUsername()%></a></li>
 					<li><a href="/logout">注销</a>
 							<%}
-					    %>
-		        	<li><a href="shopping_cart.html"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
-		        </ul>
-		    </div>
-		</nav>
+						%>
+					<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 		<div class="container other-page-magtop">
 			<div class="page-header">
 				<ul class="breadcrumb">
 					<li>
-						 <a href="index.html">主页</a>
+						 <a href="/index">主页</a>
 					</li>
 					<li>
 						 <a class="active">搜索</a>

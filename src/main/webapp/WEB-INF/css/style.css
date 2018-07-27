@@ -56,6 +56,13 @@ a{
 .a-bule{
 	color:deepskyblue;
 }
+
+/*购物车*/
+.cart-table .form-control:focus{
+    border-color:#ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)'
+}
 .cart-table tr td:first-child{
 	border-left:solid 1px #DDDDDD ;
 }
@@ -65,14 +72,32 @@ a{
 .cart-table tr:last-child{
 	border-bottom:solid 1px #DDDDDD ;
 }
+.cart-product-xj{
+    background-color: #F5F5F5;
+}
+
+
+
 .cart-table-sm{
 	font-size: 12px;
 }
 .table tbody tr td{
 	vertical-align: middle;
 }
+.cart-table label{
+    margin-bottom: 0px;
+    font-weight: normal;
+    display: inline;
+}
+
 
 /*产品详情*/
+#productInfo .form-control:focus{
+    border-color:#ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)'
+}
+
 .subImages{
 	margin-top: 20px;
 }

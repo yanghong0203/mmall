@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
 		<title>用户登录</title>
 	</head>
 	<body>
@@ -32,8 +33,7 @@
 		        </ul>
 		        <ul class="nav navbar-nav navbar-right">
 		        	<li><a href="search">搜索</a></li>
-
-		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span><span class="badge badge-position">7</span></a></li>
+		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>
@@ -169,7 +169,8 @@
                         success:function (result) {
                             if (result.status == 0){
                                 alert(result.msg)
-                                window.location.href='/index';
+                                window.history.go(-1);
+                                window.location.href="/index"
                             }else {
                                 alert(result.msg);
                             }
