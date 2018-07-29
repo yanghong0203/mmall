@@ -39,5 +39,6 @@
     </bean>
     <mvcc:default-servlet-handler/>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
+    <mvc:view-controller path="/" view-name="forward:/index"/>
 
 </beans>
