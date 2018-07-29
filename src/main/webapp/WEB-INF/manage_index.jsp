@@ -47,7 +47,7 @@
 					</ul>
 				</div>
 				<div class="manage-body-right">
-					<div class="row">
+					<div class="row manage-body-right-title">
 						<div class="col-sm-6">
 							<h3><span class="glyphicon glyphicon-home">&nbsp;</span>商品管理</h3>
 						</div>

@@ -54,7 +54,7 @@
 					</ul>
 				</div>
 				<div class="manage-body-right">
-					<div class="row">
+					<div class="row manage-body-right-title">
 						<div class="col-sm-6">
 							<h3><span class="glyphicon glyphicon-home">&nbsp;</span>添加商品</h3>
 						</div>

@@ -197,13 +197,13 @@
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-12" align="center">
-					<img src="img/footerImgShow_2.png"/>
-					<h4 class="text-center">微信公众号</h4>
+					<h4>羚羊数码</h4>
+					<p>羚羊数码原创生活类电商品牌</p>
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid text-center panel-footer">
-				<p>Copyright1999-2016 北京中公教育科技股份有限公司 .All Rights Reserved 京ICP证161188号</p>
+			<p>Copyright2017-2018 重庆羚羊科技股份有限公司 .All Rights Reserved</p>
 		</div>
 		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>

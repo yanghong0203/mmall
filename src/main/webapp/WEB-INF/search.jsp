@@ -125,8 +125,8 @@
 		<div class="container-fluid index-bottom panel-footer">
 			<div class="container">
 				<div class="col-md-3 col-sm-12 text-center">
-					<h4>青竹简介</h4>
-					<p>青叶良品原创生活类电商品牌，秉承一贯的严谨态度，我们深入世界各地，从源头全程严格把控商品生产环节，力求帮助消费者甄选到最优质的商品，全线采用天然原材料，控制甲醛低量无害，采用进口工艺，国际生产线不断优化，食材保证核心原产地新鲜直供，让你享受品质生活</p>
+					<h4>羚羊数码</h4>
+					<p>羚羊数码原创生活类电商品牌</p>
 				</div>
 				<div class="col-md-1">
 				</div>
@@ -188,13 +188,13 @@
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-12" align="center">
-					<img src="img/footerImgShow_2.png"/>
+					<img width="150px" height="150px" src="http://img.youngh.cn/wximg.png"/>
 					<h4 class="text-center">微信公众号</h4>
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid text-center panel-footer">
-				<p>Copyright1999-2016 北京中公教育科技股份有限公司 .All Rights Reserved 京ICP证161188号</p>
+			<p>Copyright2017-2018 重庆羚羊科技股份有限公司 .All Rights Reserved</p>
 		</div>
 			
 		

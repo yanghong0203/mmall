@@ -172,7 +172,7 @@ a{
 }
 
 #manageLogin-bki{
-	background-image:url(../img/bg-1.jpg)
+	background-image:url(http://img.youngh.cn/managebg.jpg);
 }
 .manageLogin-mian{
 	margin-top: 350px;
@@ -226,4 +226,7 @@ a{
 .manage-body-right{
 	margin-left: 250px;
 	background-color:#D5D7DE;
+}
+.manage-body-right-title{
+	margin-right: 0px;
 }

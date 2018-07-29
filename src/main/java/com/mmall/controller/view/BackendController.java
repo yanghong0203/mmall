@@ -41,7 +41,7 @@ public class BackendController {
     @RequestMapping("index")
     public ModelAndView index(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         ModelAndView modelAndView = new ModelAndView();
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        User user = (User)session.getAttribute(Const.ADMIN_USER);
         if (null == user) {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
@@ -59,17 +59,17 @@ public class BackendController {
 
     @RequestMapping("login_out")
     public String loginOut(HttpSession session){
-        if (null == session.getAttribute(Const.CURRENT_USER)) {
+        if (null == session.getAttribute(Const.ADMIN_USER)) {
             return "redirect:/manage/view/login";
         }
-        session.removeAttribute(Const.CURRENT_USER);
+        session.removeAttribute(Const.ADMIN_USER);
         return "redirect:/manage/view/login";
     }
 
     @RequestMapping("add")
     public ModelAndView productAdd(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.CURRENT_USER)) {
+        if (null == session.getAttribute(Const.ADMIN_USER)) {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
         }
@@ -82,7 +82,7 @@ public class BackendController {
     @RequestMapping("category")
     public ModelAndView productCatrgory(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.CURRENT_USER)) {
+        if (null == session.getAttribute(Const.ADMIN_USER)) {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
         }else {
@@ -95,7 +95,7 @@ public class BackendController {
     @RequestMapping("update")
     public ModelAndView productUpdate(HttpSession session,Integer productId){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.CURRENT_USER)) {
+        if (null == session.getAttribute(Const.ADMIN_USER)) {
             modelAndView.setViewName("redirect:/manage/view/login");
             return modelAndView;
         }else {
