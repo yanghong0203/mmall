@@ -140,7 +140,7 @@
 					thisTr.children("td").eq(i).html("<input type='text' name='"+product[i-1]+"' id='"+product[i-1]+id+"' class='form-control' value='"+tdValue+"'>");
 				}
 				old[4] = thisTr.children("td").eq(i).html();
-				thisTr.children("td").eq(i).html(" <select class='form-control' id='indexStatus"+id+"' name='indexStatus'><option value='0'>普通商品</option><option value='1'>轮播商品</option><option value='2'>新品推荐</option><option value='3'>限时促销</option><option value='4'>热门商品</option></select>");
+				thisTr.children("td").eq(i).html(" <select class='form-control' id='indexStatus\"+id+\"' name='indexStatus'><option value='0'>普通商品</option><option value='1'>轮播商品</option><option value='2'>新品推荐</option><option value='3'>限时促销</option><option value='4'>热门商品</option></select>");
                 old[5] = thisTr.children("td").eq(++i).html();
                 thisTr.children("td").eq(i).html(" <select class='form-control' id='status"+id+"' name='status'><option value='1'>上架</option><option value='2'>下架</option></select>");
 				bt.html("保存");

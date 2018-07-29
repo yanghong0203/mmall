@@ -128,7 +128,7 @@
 				<div class="col-md-9">
 					<c:forEach items="${productList}" var="product">
 						<c:if test="${product.indexStatus == 3}">
-							<c:if test="${product.name ne 'Meizu/魅族 魅蓝 E3' and product.name ne 'OPPO R15星云特别版'}">
+							<c:if test="${product.name != 'Meizu/魅族 魅蓝 E3' and product.name != 'OPPO R15星云特别版'}">
 								<div class="col-md-4 col-xs-6 col-sm-6">
 									<a href="/product_detail?productId=${product.id}"><img class="img-responsive" src="${product.imageHost}${product.mainImage}"/></a>
 								</div>
@@ -158,8 +158,8 @@
 			</div>
 			<div class="row hot-product-list">
 				<c:forEach items="${productList}" var="product">
-					<c:if test="${product.indexStatus == 3}">
-						<c:if test="${product.name ne 'Meizu/魅族 魅蓝 E3' and product.name ne 'OPPO R15星云特别版'}">
+					<c:if test="${product.indexStatus == 4}">
+						<c:if test="${product.name != '360 N6Pro' and product.name != 'Meizu/魅族 PRO 7'}">
 							<div class="col-xs-6 col-sm-3 col-md-2 thumbnail">
 								<a href="/product_detail?productId=${product.id}" ><img src="${product.imageHost}${product.mainImage}" /></a>
 								<h5>${product.name}</h5>
@@ -203,8 +203,8 @@
 						<img class="img-responsive" src="img/pb.png"/>
 					</a>
 				</div>
-			</div>
-		</div>--%>
+			</div>--%>
+		</div>
 		<div class="container-fluid index-bottom panel-footer">
 			<div class="container">
 				<div class="col-md-3 col-sm-12 text-center">

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/manage/view")
+@RequestMapping("/manage/")
 public class BackendController {
 
     @Autowired
