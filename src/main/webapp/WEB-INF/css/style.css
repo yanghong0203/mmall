@@ -61,7 +61,7 @@ a{
 .cart-table .form-control:focus{
     border-color:#ccc;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)'
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 .cart-table tr td:first-child{
 	border-left:solid 1px #DDDDDD ;
@@ -95,7 +95,7 @@ a{
 #productInfo .form-control:focus{
     border-color:#ccc;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)'
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
 .subImages{

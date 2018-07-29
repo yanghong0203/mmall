@@ -43,7 +43,7 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					%>
-		        	<li><a href="/hopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
+		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>

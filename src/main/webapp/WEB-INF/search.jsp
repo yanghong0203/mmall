@@ -3,6 +3,7 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
@@ -63,29 +64,44 @@
 						<div class="input-group col-md-5 col-xs-8 col-lg-3 col-sm-6">
 							<input type="text" class="form-control" name="keyword">
 							<span class="input-group-btn">
-					    	<button class="btn btn-default" type="button">搜索</button>
+					    	<button class="btn btn-default" type="submit">搜索</button>
 					    </span>
 						</div>
 					</form>
 				</div>
 			</div>
 			<c:choose>
-				<c:when test="${productList != null}">
-					<p class="text-right">共24个商品</p>
-					<div class="row commodity-list">
-						<c:forEach items="${productList}" var="product">
-							<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-								<div class="thumbnail">
-									<a href="/product_detail?productId=${product.id}" target="_blank">
-										<img src="${product.imageHost}${product.subImage[0]}"/>
-										<h5>${product.name}</h5>
-										<p class="commodity-price">￥${product.price}</p>
-									</a>
-								</div>
-							</div>
-						</c:forEach>
+				<c:when test="${productList == null}">
+					<div class="text-center" style="height: 500px">
+
 					</div>
-					<nav aria-label="Page navigation" class="pull-right">
+				</c:when>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${fn:length(productList) == 0}">
+							<div class="jumbotron text-center">
+								<h3>抱歉~我们找不到对应的商品，请您继续逛逛吧。</h3>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<p class="text-right">共${fn:length(productList)}个商品</p>
+							<div class="row commodity-list">
+								<c:forEach items="${productList}" var="product">
+									<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+										<div class="thumbnail">
+											<a href="/product_detail?productId=${product.id}" target="_blank">
+												<img src="${product.imageHost}${product.subImage[0]}"/>
+												<h5>${product.name}</h5>
+												<p class="commodity-price">￥${product.price}</p>
+											</a>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+					<%--<nav aria-label="Page navigation" class="pull-right">
 						<ul class="pagination">
 							<li>
 								<a href="#" aria-label="Previous">
@@ -103,13 +119,7 @@
 								</a>
 							</li>
 						</ul>
-					</nav>
-				</c:when>
-				<c:otherwise>
-					<div class="jumbotron text-center">
-						<h3>抱歉~我们找不到对应的商品，请您继续逛逛吧。</h3>
-					</div>
-				</c:otherwise>
+					</nav>--%>
 			</c:choose>
 		</div>
 		<div class="container-fluid index-bottom panel-footer">

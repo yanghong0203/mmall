@@ -168,7 +168,6 @@
                         data: $("#user_login").serialize(),
                         success:function (result) {
                             if (result.status == 0){
-                                alert(result.msg)
                                 window.history.go(-1);
                                 window.location.href="/index"
                             }else {
