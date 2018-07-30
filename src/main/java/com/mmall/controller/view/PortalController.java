@@ -39,7 +39,7 @@ public class PortalController {
     public ModelAndView list(@RequestParam(value = "keyword",required = false) String keyword,
                              @RequestParam(value = "categoryId",required = false) Integer categoryId,
                              @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
-                             @RequestParam(value = "pageSize",defaultValue = "24") int pageSize,
+                             @RequestParam(value = "pageSize",defaultValue = "12") int pageSize,
                              @RequestParam(value = "orderBy",defaultValue = "") String orderBy) {
         ModelAndView modelAndView = new ModelAndView();
         ServerResponse serverResponseProduct = iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);

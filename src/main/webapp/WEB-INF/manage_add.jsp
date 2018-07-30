@@ -24,10 +24,10 @@
 		<div class="container-fluid manage-head">
 			<div class="row">
 				<div class="col-sm-6">
-					<a href="/manage/view/index"><span>羚羊数码</span>后台管理系统</a>
+					<a href="/manage/index"><span>羚羊数码</span>后台管理系统</a>
 				</div>
 				<div class="col-sm-6">
-					<a href="/manage/view/login_out"><button class="btn btn-danger  pull-right">退出</button></a>
+					<a href="/manage/login_out"><button class="btn btn-danger  pull-right">退出</button></a>
 				</div>
 			</div>
 		</div>
@@ -38,8 +38,8 @@
 						<li class="list-group-item">
 							<h3>商品</h3>
 							<ul class="list-group manage-body-left-ul">
-								<a href="/manage/view/index" class="list-group-item">商品管理</a>
-								<a href="/manage/view/category" class="list-group-item">品类管理</a>
+								<a href="/manage/index" class="list-group-item">商品管理</a>
+								<a href="/manage/category" class="list-group-item">品类管理</a>
 							</ul>
 						</li>
 						<li class="list-group-item">
@@ -64,7 +64,7 @@
 							<span>商品</span>
 						</li>
 						<li>
-							<a href="/manage/view/index">商品管理</a>
+							<a href="/manage/index">商品管理</a>
 						</li>
 						<li class="active">添加商品</li>
 					</ol>

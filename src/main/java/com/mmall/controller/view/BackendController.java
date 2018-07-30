@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/manage/")
+@RequestMapping("/manage")
 public class BackendController {
 
     @Autowired
@@ -39,11 +39,11 @@ public class BackendController {
     }
 
     @RequestMapping("index")
-    public ModelAndView index(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+    public ModelAndView index(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "11") int pageSize){
         ModelAndView modelAndView = new ModelAndView();
         User user = (User)session.getAttribute(Const.ADMIN_USER);
         if (null == user) {
-            modelAndView.setViewName("redirect:/manage/view/login");
+            modelAndView.setViewName("redirect:/manage/login");
             return modelAndView;
         }
         if (iUserService.checkAdminRole(user).isSuccess()){
@@ -52,7 +52,7 @@ public class BackendController {
             modelAndView.setViewName("manage_index");
             return modelAndView;
         }else {
-            modelAndView.setViewName("redirect:/manage/view/login");
+            modelAndView.setViewName("redirect:/manage/login");
             return modelAndView;
         }
     }
@@ -60,17 +60,17 @@ public class BackendController {
     @RequestMapping("login_out")
     public String loginOut(HttpSession session){
         if (null == session.getAttribute(Const.ADMIN_USER)) {
-            return "redirect:/manage/view/login";
+            return "redirect:/manage/login";
         }
         session.removeAttribute(Const.ADMIN_USER);
-        return "redirect:/manage/view/login";
+        return "redirect:/manage/login";
     }
 
     @RequestMapping("add")
     public ModelAndView productAdd(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/view/login");
+            modelAndView.setViewName("redirect:/manage/login");
             return modelAndView;
         }
         ServerResponse serverResponse = iCategoryService.getAllCategory();
@@ -83,7 +83,7 @@ public class BackendController {
     public ModelAndView productCatrgory(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/view/login");
+            modelAndView.setViewName("redirect:/manage/login");
             return modelAndView;
         }else {
             ServerResponse serverResponse = iCategoryService.getAllCategory();
@@ -96,7 +96,7 @@ public class BackendController {
     public ModelAndView productUpdate(HttpSession session,Integer productId){
         ModelAndView modelAndView = new ModelAndView();
         if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/view/login");
+            modelAndView.setViewName("redirect:/manage/login");
             return modelAndView;
         }else {
             Map data = Maps.newHashMap();

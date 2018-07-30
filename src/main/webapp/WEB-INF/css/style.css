@@ -199,6 +199,7 @@ a{
 	height: 70px;
 	position: fixed;
 	color: #d0d8df;
+	z-index: 1000;
 }
 .manage-head a{
 	color: #00a0df;
@@ -212,6 +213,7 @@ a{
 	font-size: 26px !important;
 }
 .manage-body-left{
+	margin-top: 70px;
 	width: 250px;
 	height: 100%;
 	position: fixed;

@@ -3,6 +3,7 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <% User user = (User) session.getAttribute(Const.CURRENT_USER);%>
 <!DOCTYPE html>
 <html>
@@ -63,9 +64,17 @@
 				<tr>
 					<th width="60px" class="text-center">分类</th>
 					<td>
-						<c:forEach items="${categoryList}" var="catrgory">
-							<a href="/list?categoryId=${catrgory.id}">${catrgory.name}</a> &nbsp;&nbsp;
-						</c:forEach>
+						<c:choose>
+							<c:when test="${fn:length(categoryList) <=1 }">
+								<span style="border-style:dotted;border-width:2px;border-color:red; color: #f54f4f;">${categoryList[0].name}<span class="badge" style="background-color: #0000;padding-bottom: 6px;"><a style="text-decoration:none;out-line: none;color:#f54f4f;" href="#"><span class="glyphicon glyphicon-remove"></span></a></span></span>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${categoryList}" var="catrgory">
+									<a href="/list?categoryId=${catrgory.id}">${catrgory.name}</a> &nbsp;&nbsp;
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+
 					</td>
 				</tr>
 			</table>
@@ -89,23 +98,9 @@
 				</c:forEach>
 			</div>
 			<nav aria-label="Page navigation" class="pull-right">
-			  <ul class="pagination">
-			    <li>
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
+				<ul class="pagination" id="jqPaginator">
+
+				</ul>
 			</nav>
 		</div>
 		
@@ -185,6 +180,36 @@
 		</div>
 		<script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
-		
+		<script type="text/javascript" src="js/jqPaginator.js"></script>
+		<script type="text/javascript">
+            $(function () {
+                $('#jqPaginator').jqPaginator({
+                    totalPages: ${productPageInfo.pages},
+                    visiblePages: 5,
+                    currentPage: ${productPageInfo.pageNum},
+                    first: '<li class="first"><a href="javascript:void(0);">首页</a></li>',
+                    prev: '<li class="prev"><a href="javascript:void(0);">上一页</a></li>',
+                    next: '<li class="next"><a href="javascript:void(0);">下一页</a></li>',
+                    last: '<li class="last"><a href="javascript:void(0);">尾页</a></li>',
+                    page: '<li class="page"><a href="javascript:void(0);">{{page}}</a></li>',
+                    onPageChange: function (num) {
+                        if(num !=${productPageInfo.pageNum} ){
+                            var categoryIdValue = getUrlParam("categoryId");
+                            if (categoryIdValue!=null){
+                                window.location.href="/list?pageNum="+num+"&categoryId="+categoryIdValue;
+                            }else {
+                                window.location.href="/list?pageNum="+num;
+                            }
+                        }
+                    }
+                });
+            })
+            function getUrlParam(name)
+            {
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r!=null) return unescape(r[2]); return null; //返回参数值
+            }
+		</script>
 	</body>
 </html>

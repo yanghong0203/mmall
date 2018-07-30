@@ -39,7 +39,7 @@
                     data: $("#login").serialize(),
 					success:function (result) {
 						if (result.status == 0){
-                            window.location.href='/manage/view/index';
+                            window.location.href='/manage/index';
 						}else {
 						    alert(result.msg);
 						}

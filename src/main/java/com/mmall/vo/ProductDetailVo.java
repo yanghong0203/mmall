@@ -19,6 +19,7 @@ public class ProductDetailVo {
     private String createTime;
     private String updateTime;
     private String imageHost;
+    private Integer indexStatus;
     private Integer parentCategoryId;
 
     public Integer getId() {
@@ -99,6 +100,14 @@ public class ProductDetailVo {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getIndexStatus() {
+        return indexStatus;
+    }
+
+    public void setIndexStatus(Integer indexStatus) {
+        this.indexStatus = indexStatus;
     }
 
     public String getCreateTime() {

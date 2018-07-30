@@ -106,6 +106,7 @@ public class ProductServiceImpl implements IProductService {
         productDetailVo.setCategoryId(product.getCategoryId());
         productDetailVo.setDetail(product.getDetail());
         productDetailVo.setStatus(product.getStatus());
+        productDetailVo.setIndexStatus(product.getIndexStatus());
         productDetailVo.setStock(product.getStock());
 
         // imageHost
