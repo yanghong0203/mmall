@@ -44,7 +44,7 @@
 					<li><a href="/logout">注销</a>
 							<%}
 					%>
-         		        	<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
+					<li><a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart glyphicon-shopping-cart-size"></span></a></li>
 		        </ul>
 		    </div>
 			</div>
@@ -66,7 +66,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${fn:length(categoryList) <=1 }">
-								<span style="border-style:dotted;border-width:2px;border-color:red; color: #f54f4f;">${categoryList[0].name}<span class="badge" style="background-color: #0000;padding-bottom: 6px;"><a style="text-decoration:none;out-line: none;color:#f54f4f;" href="#"><span class="glyphicon glyphicon-remove"></span></a></span></span>
+								<span style="border-style:dotted;border-width:2px;border-color:red; color: #f54f4f;">${categoryList[0].name}<span class="badge" style="background-color:rgba(0,0,0,0);padding-bottom: 6px;"><a style="text-decoration:none;out-line: none;color:#f54f4f;" href="/list"><span class="glyphicon glyphicon-remove"></span></a></span></span>
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${categoryList}" var="catrgory">

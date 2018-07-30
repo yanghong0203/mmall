@@ -138,31 +138,31 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品主页图片</label>
 								<div class="col-sm-5">
-									<input type="file" name="imgs">
+									<input type="file" name="mainImg">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-5">
-									<input type="file" name="imgs">
+									<input type="file" name="img1">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-5">
-									<input type="file" name="imgs">
+									<input type="file" name="img2">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-5">
-									<input type="file" name="imgs">
+									<input type="file" name="img3">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-5">
-									<input type="file" name="imgs">
+									<input type="file" name="img4">
 								</div>
 							</div>
 							<div class="form-group">
@@ -182,7 +182,7 @@
                 $("#updateProduct").ajaxSubmit(function(result) {
                     if (result.status == 0) {
                         alert(result.data);
-                        window.location.href='/manage/view/index'
+                        window.location.href='/manage/index'
                     }else {
                         alert("更新失败");
 					}

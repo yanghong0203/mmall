@@ -127,31 +127,31 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品主页图片</label>
 								<div class="col-sm-4">
-									<input type="file" name="imgs">
+									<input type="file" name="mainImg">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
-									<input type="file" name="imgs">
+									<input type="file" name="img1">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
-									<input type="file" name="imgs">
+									<input type="file" name="img2">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
-									<input type="file" name="imgs">
+									<input type="file" name="img3">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">商品详情图片</label>
 								<div class="col-sm-4">
-									<input type="file" name="imgs">
+									<input type="file" name="img4">
 								</div>
 							</div>
 							<div class="form-group">

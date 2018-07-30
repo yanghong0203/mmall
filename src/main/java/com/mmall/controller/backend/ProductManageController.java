@@ -1,5 +1,6 @@
 package com.mmall.controller.backend;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,23 +40,40 @@ public class ProductManageController {
 
     @RequestMapping("save.do")
     @ResponseBody
-    public ServerResponse productSave(HttpSession session,Product product,@RequestParam(value = "imgs",required = false) MultipartFile[] imgs,HttpServletRequest request){
+    public ServerResponse productSave(HttpSession session,Product product,
+                                      @RequestParam(value = "mainImg",required = false) MultipartFile mainImg,
+                                      @RequestParam(value = "img1",required = false) MultipartFile img1,
+                                      @RequestParam(value = "img2",required = false) MultipartFile img2,
+                                      @RequestParam(value = "img3",required = false) MultipartFile img3,
+                                      @RequestParam(value = "img4",required = false) MultipartFile img4,
+                                      HttpServletRequest request){
         User user = (User) session.getAttribute(Const.ADMIN_USER);
         if (user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录管理员");
         }
-        if (iUserService.checkAdminRole(user).isSuccess()){
+       if (iUserService.checkAdminRole(user).isSuccess()){
             // 填充我们新增加产品的业务逻辑
-            if (imgs != null){
-                String path = request.getSession().getServletContext().getRealPath("upload");
-                product.setMainImage(iFileService.upload(imgs[0],path));
+            List<MultipartFile> imgs = Lists.newArrayList();
+            if (img1 != null){
+                imgs.add(img1);
+            }
+           if (img2 != null){
+               imgs.add(img2);
+           } if (img3 != null){
+               imgs.add(img3);
+           } if (img4 != null){
+               imgs.add(img4);
+           }
+            String path = request.getSession().getServletContext().getRealPath("upload");
+            if (mainImg != null){
+                product.setMainImage(iFileService.upload(mainImg,path));
+            }
+            if (imgs.size()>0){
                 StringBuilder subImages = new StringBuilder("");
-                if (imgs.length > 1){
-                    for (int i=1;i<imgs.length;i++){
-                        subImages.append(iFileService.upload(imgs[i],path)+",");
-                    }
-                    product.setSubImages(subImages.toString());
+                for (int i=0;i<imgs.size();i++){
+                    subImages.append(iFileService.upload(imgs.get(i),path)+",");
                 }
+                product.setSubImages(subImages.toString());
             }
             product.setStatus(1);
             return iProductService.saveOrUpdateProduct(product);
