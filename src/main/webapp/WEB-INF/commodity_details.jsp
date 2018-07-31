@@ -134,7 +134,7 @@
 			<div class="p-detail container" align="center">
 				${product.detail}
 			</div>
-			
+
 		</div>
 		<div class="container-fluid index-bottom panel-footer">
 			<div class="container">
@@ -215,7 +215,7 @@
 
 		<script type="text/javascript">
 			$(function () {
-			    $(".p-detail").addClass("img-responsive");
+			    $(".p-detail img").addClass("img-responsive");
 				$("#pBtnReduce").click(function () {
 					var num = parseInt($("#pNumber").val());
 					if(num > 1){

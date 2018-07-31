@@ -79,7 +79,7 @@
 									<td><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})"/></td>
 								</c:if>
 								<td><a href="/product_detail?productId=${cartProduct.productId}"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></a><span>${cartProduct.productName}</span></td>
-								<td align="center"><span>￥${cartProduct.productPrice}</span></td>
+								<td align="center"><span>${cartProduct.productPrice}</span></td>
 								<td>
 									<div class="input-group">
 										<span class="input-group-btn">
@@ -111,7 +111,7 @@
 							    </span>
 									</div>
 								</td>
-								<td align="center">￥${cartProduct.productTotalPrice}</td>
+								<td align="center">${cartProduct.productTotalPrice}</td>
 								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
 							</tr>
 						</c:if>
@@ -136,7 +136,7 @@
 								<c:if test="${cartProduct.productChecked == 0}">
 									<td width="10%"><input type="checkbox" class="select-cart-prduct checkbox${cartProduct.productId}" onclick="productCheck(${cartProduct.productId})"/></td>
 								</c:if>
-								<td width="30%"><a href="/product_detail?productId=${cartProduct.productId}"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></a><span>${cartProduct.productName}</span></td>
+								<td width="30%"><a href="/product_detail?productId=${cartProduct.productId}"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></a></td>
 								<td >
 									<h5>${cartProduct.productName}</h5>
 									<div class="input-group input-group-sm col-xs-12 col-sm-5">
@@ -148,7 +148,7 @@
 										   <button class="btn btn-default" type="button" onclick="addProductNum('${cartProduct.productId}',${cartProduct.productStock},${cartProduct.productPrice})">+</button>
 										</span>
 									</div>
-									<p class="commodity-price${cartProduct.productId}">￥${cartProduct.productTotalPrice}</p>
+									<p class="commodity-price${cartProduct.productId}">${cartProduct.productTotalPrice}</p>
 								</td>
 								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
 							</tr>
@@ -156,7 +156,7 @@
 						<c:if test="${cartProduct.productStatus == 2}">
 							<tr class="tr${cartProduct.productId} cart-product-xj">
 								<td width="10%"><input type="checkbox" disabled="disabled"/></td>
-								<td width="30%"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/><span>${cartProduct.productName}</span></td>
+								<td width="30%"><img width="70px" src="${cartProduct.imageHost}${cartProduct.subImage[0]}"/></td>
 								<td >
 									<h5>${cartProduct.productName}</h5>
 									<div class="input-group input-group-sm col-xs-12 col-sm-5">
@@ -168,7 +168,7 @@
 										   <button class="btn btn-default" type="button" disabled="disabled">+</button>
 										</span>
 									</div>
-									<p>￥${cartProduct.productTotalPrice}</p>
+									<p>${cartProduct.productTotalPrice}</p>
 								</td>
 								<td align="center"><a href="javascript:cartDelete('${cartProduct.productId}');" class="cart-delete">删除</a></td>
 							</tr>
@@ -271,8 +271,8 @@
                         success: function (result) {
                             if (result.status == 0) {
                                 $(".pNumber"+id).val(num);
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
-                                $(".product-price"+id).html("￥"+(price*num).toFixed(2));
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
+                                $(".product-price"+id).html((price*num).toFixed(2));
                             }
                             if(result.status == 10){
                                 alert("用户信息已过期，请重新登录");
@@ -296,8 +296,8 @@
                         success: function (result) {
                             if (result.status == 0) {
                                 $(".pNumber"+id).val(num);
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
-                                $(".product-price"+id).html("￥"+(price*num).toFixed(2));
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
+                                $(".product-price"+id).html((price*num).toFixed(2));
                             }
                             if(result.status == 10){
                                 alert("用户信息已过期，请重新登录");
@@ -319,7 +319,7 @@
                         url: "/cart/select_all.do",
                         success: function (result) {
                             if (result.status == 0) {
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
                                 $('.select-cart-prduct').prop("checked", true);
                             }
                             if(result.status == 10){
@@ -337,7 +337,7 @@
                         url: "/cart/un_select_all.do",
                         success: function (result) {
                             if (result.status == 0) {
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
                                 $('.select-cart-prduct').prop("checked", false);
                             }
                             if(result.status == 10){
@@ -364,7 +364,7 @@
                     data:"productIds="+id,
                     success:function (result) {
                         if (result.status == 0){
-                            $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                            $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
                             $(".tr"+id).remove();
                         }
                         if(result.status == 10){
@@ -389,7 +389,7 @@
                         data:"productId="+id,
                         success:function (result) {
                             if (result.status == 0){
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
                                 if (result.data.allChecked == true) {
                                     $(".selectAll").prop('checked',true);
 								}else {
@@ -412,7 +412,7 @@
                         data:"productId="+id,
                         success:function (result) {
                             if (result.status == 0){
-                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice);
+                                $(".cartTotalPrice").html("￥"+result.data.cartTotalPrice.toFixed(2));
                                 if (result.data.allChecked == true) {
                                     $(".selectAll").prop('checked',true);
                                 }else {

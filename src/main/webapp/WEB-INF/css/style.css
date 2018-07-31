@@ -72,22 +72,19 @@ a{
 .cart-table tr:last-child{
 	border-bottom:solid 1px #DDDDDD ;
 }
-.cart-product-xj{
-    background-color: #F5F5F5;
-}
-
-
-
 .cart-table-sm{
 	font-size: 12px;
 }
-.table tbody tr td{
-	vertical-align: middle;
+.cart-product-xj{
+    background-color: #F5F5F5;
 }
 .cart-table label{
-    margin-bottom: 0px;
-    font-weight: normal;
-    display: inline;
+	margin-bottom: 0px;
+	font-weight: normal;
+	display: inline;
+}
+.table tbody tr td{
+	vertical-align: middle;
 }
 
 

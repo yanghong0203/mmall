@@ -15,8 +15,8 @@ public class ManageInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
         HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute(Const.ADMIN_USER);
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
         try {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (user != null || handlerMethod.getMethod().getName().equals("login")){
                 return true;
             }

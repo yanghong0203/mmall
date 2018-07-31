@@ -168,8 +168,8 @@
                         data: $("#user_login").serialize(),
                         success:function (result) {
                             if (result.status == 0){
-                                window.history.go(-1);
-                                window.location.href="/index"
+                                self.location=document.referrer;
+                                window.location.href="/index";
                             }else {
                                 alert(result.msg);
                             }
