@@ -40,5 +40,12 @@
     <mvcc:default-servlet-handler/>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
     <mvc:view-controller path="/" view-name="redirect:/index"/>
-
+    <mvc:interceptors>
+        <!-- 对所有请求都拦截，公共拦截器可以有多个 -->
+        <!--<bean name="baseInterceptor" class="com.mmall.interceptor.ManageInterceptor" />-->
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <bean class="com.mmall.interceptor.ManageInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

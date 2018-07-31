@@ -41,27 +41,15 @@ public class BackendController {
     @RequestMapping("index")
     public ModelAndView index(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "11") int pageSize){
         ModelAndView modelAndView = new ModelAndView();
-        User user = (User)session.getAttribute(Const.ADMIN_USER);
-        if (null == user) {
-            modelAndView.setViewName("redirect:/manage/login");
-            return modelAndView;
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
-            ServerResponse serverResponse = iProductService.getProductList(pageNum,pageSize);
-            modelAndView.addObject("data",serverResponse.getData());
-            modelAndView.setViewName("manage_index");
-            return modelAndView;
-        }else {
-            modelAndView.setViewName("redirect:/manage/login");
-            return modelAndView;
-        }
+        ServerResponse serverResponse = iProductService.getProductList(pageNum,pageSize);
+        modelAndView.addObject("data",serverResponse.getData());
+        modelAndView.setViewName("manage_index");
+        return modelAndView;
+
     }
 
     @RequestMapping("login_out")
     public String loginOut(HttpSession session){
-        if (null == session.getAttribute(Const.ADMIN_USER)) {
-            return "redirect:/manage/login";
-        }
         session.removeAttribute(Const.ADMIN_USER);
         return "redirect:/manage/login";
     }
@@ -69,10 +57,6 @@ public class BackendController {
     @RequestMapping("add")
     public ModelAndView productAdd(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/login");
-            return modelAndView;
-        }
         ServerResponse serverResponse = iCategoryService.getAllCategory();
         modelAndView.addObject("data",serverResponse.getData());
         modelAndView.setViewName("manage_add");
@@ -82,32 +66,27 @@ public class BackendController {
     @RequestMapping("category")
     public ModelAndView productCatrgory(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/login");
-            return modelAndView;
-        }else {
-            ServerResponse serverResponse = iCategoryService.getAllCategory();
-            modelAndView.addObject("data",serverResponse.getData());
-            modelAndView.setViewName("manage_category");
-            return modelAndView;
-        }
+        ServerResponse serverResponse = iCategoryService.getAllCategory();
+        modelAndView.addObject("data",serverResponse.getData());
+        modelAndView.setViewName("manage_category");
+        return modelAndView;
+
     }
     @RequestMapping("update")
     public ModelAndView productUpdate(HttpSession session,Integer productId){
         ModelAndView modelAndView = new ModelAndView();
-        if (null == session.getAttribute(Const.ADMIN_USER)) {
-            modelAndView.setViewName("redirect:/manage/login");
-            return modelAndView;
-        }else {
-            Map data = Maps.newHashMap();
-            ServerResponse serverResponse1 = iProductService.getProductDetail(productId);
-            ServerResponse serverResponse2 = iCategoryService.getAllCategory();
-            data.put("categoryList",serverResponse2.getData());
-            data.put("productVo",serverResponse1.getData());
-            modelAndView.addAllObjects(data);
-            modelAndView.setViewName("manage_update");
-            return modelAndView;
-        }
+        Map data = Maps.newHashMap();
+        ServerResponse serverResponse1 = iProductService.getProductDetail(productId);
+        ServerResponse serverResponse2 = iCategoryService.getAllCategory();
+        data.put("categoryList",serverResponse2.getData());
+        data.put("productVo",serverResponse1.getData());
+        modelAndView.addAllObjects(data);
+        modelAndView.setViewName("manage_update");
+        return modelAndView;
     }
 
+    @RequestMapping("request404")
+    public String request404(){
+        return ("404");
+    }
 }
