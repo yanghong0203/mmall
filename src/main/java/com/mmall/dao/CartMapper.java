@@ -30,5 +30,8 @@ public interface CartMapper {
 
     int selectCartProductCount(@Param("userId") Integer userId);
 
-    /*int reverseSelectProduct(Integer userId);*/
+    List<Cart> selectCheckedCartByUserId(Integer userId);
+
+    int cleanCart(Integer userId);
+
 }

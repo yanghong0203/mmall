@@ -60,10 +60,10 @@
 				</ul>
 			</div>
 			<div>
-				<table class="table cart-table hidden-xs hidden-sm">
+				<table class="table cart-table">
 					<tr>
 						<td width="10%"><input type="checkbox" class="select-cart-prduct selectAll" onclick="selectAll()" id="bigSelectAll"><label for="bigSelectAll">&nbsp;全选</label> </td>
-						<td width="42%">商品名称</td>
+						<td width="32%">商品名称</td>
 						<td width="12%" align="center">单价</td>
 						<td width="12%" align="center">数量</td>
 						<td width="12%" align="center">小计</td>
@@ -123,7 +123,7 @@
 						<td align="center"><button type="submit" class="btn btn-sm btn-danger">确认结算</button></td>
 					</tr>
 				</table>
-				<table class="table cart-table cart-table-sm hidden-md hidden-lg">
+				<%--<table class="table cart-table cart-table-sm hidden-md hidden-lg">
 					<tr>
 						<td colspan="4"><label for="smSelectAll"><input type="checkbox" onclick="selectAll()" class="select-cart-prduct selectAll" id="smSelectAll">&nbsp;全选</label></td>
 					</tr>
@@ -180,7 +180,7 @@
 						<td align="right"><p>已选商品1件合计（包邮）：</p><span class="commodity-price lead cartTotalPrice">￥${cartData.cartTotalPrice} </span><span>已优惠：$0</span></td>
 						<td align="right"><button type="submit" class="btn btn-xs btn-danger">确认结算</button></td>
 					</tr>
-				</table>
+				</table>--%>
 			</div>
 		</div>
 		<div class="container-fluid index-bottom panel-footer">

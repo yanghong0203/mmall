@@ -38,7 +38,7 @@ public class CartServiceImpl implements ICartService {
             // 这个产品不在这个购物车里，需要新增一个这个产品的记录
             Cart cartItem = new Cart();
             cartItem.setQuantity(count);
-            cartItem.setChecked(Const.Cart.UN_CHECKED);
+            cartItem.setChecked(Const.Cart.CHECKED);
             cartItem.setProductId(productId);
             cartItem.setUserId(userId);
             cartMapper.insert(cartItem);
