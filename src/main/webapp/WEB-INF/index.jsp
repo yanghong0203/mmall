@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="../../css/style.css" />
         <link rel="icon" href="http://img.youngh.cn/title.ico" type="image/x-icon"/>
-		<title>羚羊数码</title>
+		<title>羚羊数码1</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-default nav-mar-bot navbar-fixed-top" role="navigation">
