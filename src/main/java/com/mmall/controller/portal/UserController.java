@@ -1,10 +1,16 @@
 package com.mmall.controller.portal;
 
 import com.mmall.common.Const;
+import com.mmall.common.RedisShardedPool;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
+import com.mmall.util.CookieUtil;
+import com.mmall.util.JsonUtil;
+import com.mmall.util.RedisPoolUtil;
+import com.mmall.util.RedisShardedPoolUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -23,13 +31,15 @@ public class UserController {
     // 用户登录
     @RequestMapping("login.do")
     @ResponseBody
-    public ServerResponse<User> login(String username, String password, HttpSession session) {
+    public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse response) {
         // service-->mybatis->dao
-        ServerResponse<User> response = iUserService.login(username, password);
-        if (response.isSuccess()) {
-            session.setAttribute(Const.CURRENT_USER, response.getData());
+        ServerResponse<User> serverResponse = iUserService.login(username, password);
+        if (serverResponse.isSuccess()) {
+            // session.setAttribute(Const.CURRENT_USER, response.getData());
+            CookieUtil.writeLoginToken(response,session.getId());
+            RedisShardedPoolUtil.setEx(session.getId(),JsonUtil.obj2String(serverResponse.getData()),Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
-        return response;
+        return serverResponse;
     }
 
     // 注册
@@ -110,13 +120,17 @@ public class UserController {
     // 获取用户详细信息
     @RequestMapping("get_infomation.do")
     @ResponseBody
-    public ServerResponse<User> getInformation(HttpSession session) {
-        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-        if (currentUser == null) {
+    public ServerResponse<User> getInformation(HttpSession session, HttpServletRequest request) {
+        String loginToken = CookieUtil.readLoginToken(request);
+        if (StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录，需要强制登录");
         }
-        return iUserService.getInformation(currentUser.getId());
+        String userJonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJonStr,User.class);
+        //User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录，需要强制登录");
+        }
+        return iUserService.getInformation(user.getId());
     }
-
-
 }
