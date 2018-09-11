@@ -276,6 +276,10 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
+    public ServerResponse closeOrder(int hour) {
+        return null;
+    }
+
     private List<OrderVo> assembleOrderVoList(List<Order> orderList,Integer userId){
         List<OrderVo> orderVoList = Lists.newArrayList();
         for (Order order : orderList){

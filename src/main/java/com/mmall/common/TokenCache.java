@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ *  已被Redis代替,此类无用
+ */
+
 public class TokenCache {
     private static Logger logger= LoggerFactory.getLogger(TokenCache.class);
     public static final String TOKEN_PREFIX = "token_";

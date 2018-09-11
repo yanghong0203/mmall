@@ -33,7 +33,19 @@
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
     <!-- session时间重置 end -->
-
+    <!-- spring session 拦截器 start -->
+   <!--
+        <filter>
+            <filter-name>springSessionRepositoryFilter</filter-name>
+            <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        </filter>
+        委托DelegatingFilterProxy类对session进行包装
+        <filter-mapping>
+            <filter-name>springSessionRepositoryFilter</filter-name>
+            <url-pattern>*.do</url-pattern>
+        </filter-mapping>
+    -->
+    <!-- spring session 拦截器 end -->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
@@ -57,6 +69,11 @@
     </servlet>
 
 
+
+   <!-- <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>-->
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>

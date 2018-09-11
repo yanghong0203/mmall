@@ -9,7 +9,9 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.mmall"/>
+    <context:component-scan base-package="com.mmall.controller" annotation-config="true" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -37,6 +39,7 @@
         <property name="maxInMemorySize" value="4096" />
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+
     <mvcc:default-servlet-handler/>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
     <mvc:view-controller path="/" view-name="redirect:/index"/>
@@ -45,7 +48,8 @@
         <!--<bean name="baseInterceptor" class="com.mmall.interceptor.ManageInterceptor" />-->
         <mvc:interceptor>
             <mvc:mapping path="/manage/**"/>
-            <bean class="com.mmall.interceptor.ManageInterceptor" />
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>--> <!--不拦截登录-->
+            <bean class="com.mmall.controller.common.interceptor.AuthorityInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

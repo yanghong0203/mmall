@@ -13,8 +13,8 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_id, product_id, quantity, checked, create_time, update_time
-  </sql>
+      id, user_id, product_id, quantity, checked, create_time, update_time
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -123,15 +123,15 @@
         where user_id = #{userId}
         and product_id = #{productId}
     </select>
-    
+
     <select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
         select
         <include refid="Base_Column_List"/>
         from mmall_cart
         where user_id = #{userId};
     </select>
-    
-    <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int" >
+
+    <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int">
         select count(1)
         from mmall_cart
         where checked = 0
@@ -143,7 +143,7 @@
         where user_id = #{userId}
         <if test="productIdList != null">
             and product_id in
-            <foreach collection="productIdList" item = "item" index="index" open="(" separator="," close=")">
+            <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
@@ -172,7 +172,7 @@
     <select id="selectCartProductCount" parameterType="int" resultType="int">
         select IFNULL(sum(quantity),0) as count from mmall_cart where user_id = #{userId}
     </select>
-    
+
     <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -180,7 +180,7 @@
         where user_id = #{userId}
         and checked = 1
     </select>
-    
+
     <delete id="cleanCart" parameterType="int">
        delete from mmall_cart
        where user_id = #{userId}

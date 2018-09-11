@@ -33,6 +33,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse response) {
         // service-->mybatis->dao
+        int a = 3/0;
         ServerResponse<User> serverResponse = iUserService.login(username, password);
         if (serverResponse.isSuccess()) {
             // session.setAttribute(Const.CURRENT_USER, response.getData());
